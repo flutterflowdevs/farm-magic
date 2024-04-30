@@ -16,11 +16,76 @@ import 'package:flutter_ffmpeg/flutter_ffmpeg.dart';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
 
+Future<String> readFile() async {
+  final rootDir = await getTemporaryDirectory();
+  final path = '${rootDir.path.toString()}/inputs.txt'; // Get the path first
+  final file = File(path);
+  return await file.readAsString();
+}
+
+Future<void> clearTempDirectory() async {
+  // Get the temporary directory
+  final appDir = await getTemporaryDirectory();
+
+  // List the files in the temporary directory
+  var tempfiles = Directory("${appDir.path}/").listSync();
+
+  debugPrint("${tempfiles.length} files deleted");
+
+  // Delete each file in the temporary directory
+  for (var file in tempfiles) {
+    await file.delete();
+  }
+}
+
+void _listofFiles() async {
+  List file = [];
+  String directoryPath = (await getTemporaryDirectory()).path;
+
+  file = Directory("$directoryPath/")
+      .listSync(); //use your folder name insted of resume.
+  debugPrint('********* Files in directory STARTED ************');
+  for (int i = 0; i < file.length; i++) {
+    debugPrint(file[i].toString());
+  }
+  debugPrint('********* Files in directory ENDEDED ************');
+}
+
+Future<File> downloadVideosToTempDirectory(List<String> videoUrls) async {
+  // Get the temporary directory
+  final appDir = await getTemporaryDirectory();
+  const inputFileName = "inputs.txt";
+  final inputListPath = '${appDir.path}/$inputFileName';
+
+  final fileInput = File(inputListPath);
+
+  // Download the videos
+  for (int i = 0; i < videoUrls.length; i++) {
+    var response = await http.get(Uri.parse(videoUrls[i]));
+    final filename = "${videoUrls[i].split('/').last.hashCode}.mp4";
+    final file = File('${appDir.path}/$filename');
+    await file.writeAsBytes(response.bodyBytes);
+    await fileInput.writeAsString('file \'$filename\' \n',
+        mode: FileMode.append);
+  }
+
+  readFile().then((value) {
+    debugPrint('______________________________________________________');
+    debugPrint(value);
+    debugPrint('______________________________________________________');
+  });
+
+  _listofFiles();
+
+  return fileInput;
+}
+
 Future<String> addVideos(
   List<String> motionUrls,
   String audioUrl,
 ) async {
   // Add your function code here!
+
   List<String> videoUrls = motionUrls;
 
   String audioUrl =
@@ -46,13 +111,13 @@ Future<String> addVideos(
     String command =
         '-f concat -safe 0 -i ${inputFile.path} -i $audioUrl -c copy -async 1 -shortest ${file.path}';
 
-    log(command.toString());
+    debugPrint(command.toString());
 
     final FlutterFFmpeg flutterFFmpeg = FlutterFFmpeg();
 
     await flutterFFmpeg
         .execute(command)
-        .then((rc) => log("FFmpeg process exited with rc $rc"));
+        .then((rc) => debugPrint("FFmpeg process exited with rc $rc"));
 
     _listofFiles();
 
@@ -69,7 +134,7 @@ Future<String> addVideos(
 
     _listofFiles();
 
-    log(downloadUrl.toString());
+    debugPrint(downloadUrl.toString());
 
     return downloadUrl;
   } catch (e) {
