@@ -1,0 +1,106 @@
+{
+  "project_info": {
+    "project_number": "590930080001",
+    "project_id": "farmers-help-rb0ek4",
+    "storage_bucket": "farmers-help-rb0ek4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:590930080001:android:45db970ca40e0b6c81eb00",
+        "android_client_info": {
+          "package_name": "com.flutterflowdevs.farmmagic"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "590930080001-ep83pdfccrdsphmdcnrtu00g0ic1c9hp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.flutterflowdevs.farmmagic",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "590930080001-bbsgov0ds65adglu85nddjkj4glvm7c0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCeMH3QPW4uMH1wbgJY9psGd8PLWlNwZpI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "590930080001-bbsgov0ds65adglu85nddjkj4glvm7c0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "590930080001-lrnfi1ke0q17acarmfn2d8417kir2sbb.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mycompany.farmershelp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:590930080001:android:7ce3f7182f57c2e081eb00",
+        "android_client_info": {
+          "package_name": "com.mycompany.farmershelp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "590930080001-75lgjmlh0fp075vccee5stup33lnbc6o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mycompany.farmershelp",
+            "certificate_hash": "b3c20e28ecc86fd688bd59d5a456d912d8cb66e3"
+          }
+        },
+        {
+          "client_id": "590930080001-mtfa6t48mll2enpqnq2j15ulaspi492u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mycompany.farmershelp",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "590930080001-bbsgov0ds65adglu85nddjkj4glvm7c0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCeMH3QPW4uMH1wbgJY9psGd8PLWlNwZpI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "590930080001-bbsgov0ds65adglu85nddjkj4glvm7c0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "590930080001-lrnfi1ke0q17acarmfn2d8417kir2sbb.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mycompany.farmershelp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
