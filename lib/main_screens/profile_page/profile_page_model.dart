@@ -17,6 +17,8 @@ class ProfilePageModel extends FlutterFlowModel<ProfilePageWidget> {
   late ProfileOptionsModel profileOptionsModel4;
   // Model for profile_options component.
   late ProfileOptionsModel profileOptionsModel5;
+  // Model for profile_options component.
+  late ProfileOptionsModel profileOptionsModel6;
 
   @override
   void initState(BuildContext context) {
@@ -25,6 +27,7 @@ class ProfilePageModel extends FlutterFlowModel<ProfilePageWidget> {
     profileOptionsModel3 = createModel(context, () => ProfileOptionsModel());
     profileOptionsModel4 = createModel(context, () => ProfileOptionsModel());
     profileOptionsModel5 = createModel(context, () => ProfileOptionsModel());
+    profileOptionsModel6 = createModel(context, () => ProfileOptionsModel());
   }
 
   @override
@@ -35,5 +38,6 @@ class ProfilePageModel extends FlutterFlowModel<ProfilePageWidget> {
     profileOptionsModel3.dispose();
     profileOptionsModel4.dispose();
     profileOptionsModel5.dispose();
+    profileOptionsModel6.dispose();
   }
 }

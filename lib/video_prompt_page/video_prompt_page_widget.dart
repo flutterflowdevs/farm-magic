@@ -79,56 +79,6 @@ class _VideoPromptPageWidgetState extends State<VideoPromptPageWidget> {
                       letterSpacing: 0.0,
                     ),
               ),
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Text(
-                    FFLocalizations.of(context).getText(
-                      '9s810xqk' /* Static */,
-                    ),
-                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                          fontFamily: 'Readex Pro',
-                          color: FlutterFlowTheme.of(context).primaryBackground,
-                          letterSpacing: 0.0,
-                        ),
-                  ),
-                  Theme(
-                    data: ThemeData(
-                      checkboxTheme: CheckboxThemeData(
-                        visualDensity: VisualDensity.compact,
-                        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(4.0),
-                        ),
-                      ),
-                      unselectedWidgetColor:
-                          FlutterFlowTheme.of(context).alternate,
-                    ),
-                    child: Checkbox(
-                      value: _model.checkboxValue ??= _model.isHardCodedValue,
-                      onChanged: (newValue) async {
-                        setState(() => _model.checkboxValue = newValue!);
-                        if (newValue!) {
-                          setState(() {
-                            _model.isHardCodedValue = true;
-                          });
-                        } else {
-                          setState(() {
-                            _model.isHardCodedValue = false;
-                          });
-                        }
-                      },
-                      side: BorderSide(
-                        width: 2,
-                        color: FlutterFlowTheme.of(context).alternate,
-                      ),
-                      activeColor: FlutterFlowTheme.of(context).success,
-                      checkColor:
-                          FlutterFlowTheme.of(context).primaryBackground,
-                    ),
-                  ),
-                ],
-              ),
             ],
           ),
           actions: const [],
@@ -357,666 +307,146 @@ class _VideoPromptPageWidgetState extends State<VideoPromptPageWidget> {
                             Expanded(
                               flex: 4,
                               child: FFButtonWidget(
-                                onPressed: (_model.textController.text == '')
-                                    ? null
-                                    : () async {
-                                        var shouldSetState = false;
-                                        if (_model.isHardCodedValue) {
-                                          setState(() {
-                                            _model.imagePath = [];
-                                            _model.videoPath = [];
-                                            _model.generationId = [];
-                                            _model.isImageGenerating = true;
-                                            _model.isLoading = true;
-                                            _model.jsonData =
-                                                FFAppState().emptyJson;
-                                            _model.hits = 0;
-                                          });
+                                onPressed: () async {
+                                  var shouldSetState = false;
+                                  if (functions.isTextFieldEmpty(
+                                      _model.textController.text)) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(
+                                          'Please enter some prompt',
+                                          style: TextStyle(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
+                                          ),
+                                        ),
+                                        duration: const Duration(milliseconds: 3000),
+                                        backgroundColor:
+                                            FlutterFlowTheme.of(context)
+                                                .secondary,
+                                      ),
+                                    );
+                                  } else {
+                                    setState(() {
+                                      _model.imagePath = [];
+                                      _model.videoPath = [];
+                                      _model.generationId = [];
+                                      _model.isImageGenerating = true;
+                                      _model.isLoading = true;
+                                      _model.jsonData = FFAppState().emptyJson;
+                                      _model.hits = 0;
+                                    });
+                                    await showModalBottomSheet(
+                                      isScrollControlled: true,
+                                      backgroundColor: Colors.transparent,
+                                      isDismissible: false,
+                                      enableDrag: false,
+                                      context: context,
+                                      builder: (context) {
+                                        return GestureDetector(
+                                          onTap: () => _model
+                                                  .unfocusNode.canRequestFocus
+                                              ? FocusScope.of(context)
+                                                  .requestFocus(
+                                                      _model.unfocusNode)
+                                              : FocusScope.of(context)
+                                                  .unfocus(),
+                                          child: Padding(
+                                            padding: MediaQuery.viewInsetsOf(
+                                                context),
+                                            child: SizedBox(
+                                              height: MediaQuery.sizeOf(context)
+                                                      .height *
+                                                  1.0,
+                                              child: PromptToVideoLoaderWidget(
+                                                height:
+                                                    MediaQuery.sizeOf(context)
+                                                        .height,
+                                                width:
+                                                    MediaQuery.sizeOf(context)
+                                                        .width,
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    ).then((value) => safeSetState(() {}));
+
+                                    await geminiGenerateText(
+                                      context,
+                                      'Action to Do:   ${_model.textController.text}. write me ${_model.parallalApiCount.toString()} Image Generation Prompts in a single line separated with \"|\" to Help Complete the Action in order:',
+                                    ).then((generatedText) {
+                                      safeSetState(() =>
+                                          _model.imgGenPrompt = generatedText);
+                                    });
+
+                                    shouldSetState = true;
+                                    await Future.wait([
+                                      Future(() async {
+                                        _model.genImage1 =
+                                            await _model.generateGenId(
+                                          context,
+                                          prompt: valueOrDefault<String>(
+                                            functions.getPrompt(
+                                                _model.imgGenPrompt!, 0),
+                                            'NA',
+                                          ),
+                                        );
+                                        shouldSetState = true;
+                                        if (!(_model.genImage1 == null ||
+                                            _model.genImage1 == '')) {
                                           setState(() {
                                             _model.jsonData =
                                                 functions.newJsonValue(
                                                     _model.jsonData!,
                                                     '0',
-                                                    '81b002ef-52f1-4336-9f01-c21f5c4b5045');
+                                                    _model.genImage1!);
                                           });
+                                        }
+                                        _model.hits = _model.hits + 1;
+                                      }),
+                                      Future(() async {
+                                        _model.genImage2 =
+                                            await _model.generateGenId(
+                                          context,
+                                          prompt: functions.getPrompt(
+                                              _model.imgGenPrompt!, 1),
+                                        );
+                                        shouldSetState = true;
+                                        if (!(_model.genImage2 == null ||
+                                            _model.genImage2 == '')) {
                                           setState(() {
                                             _model.jsonData =
                                                 functions.newJsonValue(
                                                     _model.jsonData!,
                                                     '1',
-                                                    '4e90a6af-0f29-4dc8-a27d-78b67cc5322b');
+                                                    _model.genImage2!);
                                           });
-                                          setState(() {
-                                            _model.hits = 0;
-                                          });
-                                          await showDialog(
-                                            context: context,
-                                            builder: (alertDialogContext) {
-                                              return AlertDialog(
-                                                title: const Text('Alert'),
-                                                content: const Text(
-                                                    'Start Generating Images'),
-                                                actions: [
-                                                  TextButton(
-                                                    onPressed: () =>
-                                                        Navigator.pop(
-                                                            alertDialogContext),
-                                                    child: const Text('Ok'),
-                                                  ),
-                                                ],
-                                              );
-                                            },
-                                          );
-                                          await Future.wait([
-                                            Future(() async {
-                                              _model.dimageJson1 = await _model
-                                                  .generateImageFromGenId(
-                                                context,
-                                                genId: functions.getJsonValue(
-                                                    _model.jsonData!, '0'),
-                                                index: 0,
-                                              );
-                                              shouldSetState = true;
-                                              if (_model.dimageJson1 == null) {
-                                                ScaffoldMessenger.of(context)
-                                                    .showSnackBar(
-                                                  SnackBar(
-                                                    content: Text(
-                                                      'Error:- ${_model.dimageJson1?.toString()}',
-                                                      style: TextStyle(
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primaryText,
-                                                      ),
-                                                    ),
-                                                    duration: const Duration(
-                                                        milliseconds: 4000),
-                                                    backgroundColor:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .secondary,
-                                                  ),
-                                                );
-                                                if (shouldSetState) {
-                                                  setState(() {});
-                                                }
-                                                return;
-                                              } else {
-                                                setState(() {
-                                                  _model.addToImagePath(
-                                                      getJsonField(
-                                                    _model.dimageJson1,
-                                                    r'''$.url''',
-                                                  ).toString());
-                                                  _model
-                                                      .addToImgId(getJsonField(
-                                                    _model.dimageJson1,
-                                                    r'''$.id''',
-                                                  ).toString());
-                                                });
-                                                setState(() {
-                                                  _model.hits = _model.hits + 1;
-                                                });
-                                              }
-                                            }),
-                                            Future(() async {
-                                              _model.dimageJson2 = await _model
-                                                  .generateImageFromGenId(
-                                                context,
-                                                genId: functions.getJsonValue(
-                                                    _model.jsonData!, '1'),
-                                                index: 1,
-                                              );
-                                              shouldSetState = true;
-                                              if (_model.dimageJson2 == null) {
-                                                ScaffoldMessenger.of(context)
-                                                    .showSnackBar(
-                                                  SnackBar(
-                                                    content: Text(
-                                                      'Error ${_model.dimageJson2?.toString()}',
-                                                      style: TextStyle(
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primaryText,
-                                                      ),
-                                                    ),
-                                                    duration: const Duration(
-                                                        milliseconds: 4000),
-                                                    backgroundColor:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .secondary,
-                                                  ),
-                                                );
-                                                if (shouldSetState) {
-                                                  setState(() {});
-                                                }
-                                                return;
-                                              } else {
-                                                setState(() {
-                                                  _model.addToImagePath(
-                                                      getJsonField(
-                                                    _model.dimageJson2,
-                                                    r'''$.url''',
-                                                  ).toString());
-                                                  _model
-                                                      .addToImgId(getJsonField(
-                                                    _model.dimageJson2,
-                                                    r'''$.id''',
-                                                  ).toString());
-                                                });
-                                                setState(() {
-                                                  _model.hits = _model.hits + 1;
-                                                });
-                                              }
-                                            }),
-                                            Future(() async {
-                                              await _model
-                                                  .audioGenerationAction(
-                                                      context);
-                                              setState(() {});
-                                              setState(() {
-                                                _model.hits = _model.hits + 1;
-                                              });
-                                            }),
-                                          ]);
-                                          if (_model.hits ==
-                                              (_model.parallalApiCount + 1)) {
-                                            setState(() {
-                                              _model.addToImageURLList('END');
-                                            });
-                                            await _model
-                                                .videoGeneratorAction(context);
-                                            setState(() {});
-                                            if (_model.isLiveAudio) {
-                                              _model.finalStaticVideoLiveAudio =
-                                                  await actions.addVideos(
-                                                _model.videoPath.toList(),
-                                                _model.audioFile,
-                                              );
-                                              shouldSetState = true;
-                                              setState(() {
-                                                _model.isLoading = false;
-                                                _model.isImageGenerating =
-                                                    false;
-                                              });
-
-                                              var videosRecordReference1 =
-                                                  VideosRecord.collection.doc();
-                                              await videosRecordReference1
-                                                  .set(createVideosRecordData(
-                                                userRef: currentUserReference,
-                                                prompt:
-                                                    _model.textController.text,
-                                                videoUrl: _model
-                                                    .finalStaticVideoLiveAudio,
-                                                videoDescription:
-                                                    _model.videoDescription,
-                                                timeStamp: getCurrentTimestamp,
-                                                isPublic: false,
-                                              ));
-                                              _model.videoDocStaticLive =
-                                                  VideosRecord.getDocumentFromData(
-                                                      createVideosRecordData(
-                                                        userRef:
-                                                            currentUserReference,
-                                                        prompt: _model
-                                                            .textController
-                                                            .text,
-                                                        videoUrl: _model
-                                                            .finalStaticVideoLiveAudio,
-                                                        videoDescription: _model
-                                                            .videoDescription,
-                                                        timeStamp:
-                                                            getCurrentTimestamp,
-                                                        isPublic: false,
-                                                      ),
-                                                      videosRecordReference1);
-                                              shouldSetState = true;
-                                              setState(() {
-                                                _model.textController?.clear();
-                                              });
-
-                                              context.pushNamed(
-                                                'GeneratedVideoPage',
-                                                queryParameters: {
-                                                  'videoDoc': serializeParam(
-                                                    _model.videoDocStaticLive,
-                                                    ParamType.Document,
-                                                  ),
-                                                }.withoutNulls,
-                                                extra: <String, dynamic>{
-                                                  'videoDoc':
-                                                      _model.videoDocStaticLive,
-                                                },
-                                              );
-
-                                              if (shouldSetState) {
-                                                setState(() {});
-                                              }
-                                              return;
-                                            } else {
-                                              _model.finalStaticVideo =
-                                                  await actions.addVideos(
-                                                _model.videoPath.toList(),
-                                                null,
-                                              );
-                                              shouldSetState = true;
-                                              setState(() {
-                                                _model.isLoading = false;
-                                                _model.isImageGenerating =
-                                                    false;
-                                              });
-
-                                              var videosRecordReference2 =
-                                                  VideosRecord.collection.doc();
-                                              await videosRecordReference2
-                                                  .set(createVideosRecordData(
-                                                userRef: currentUserReference,
-                                                prompt:
-                                                    _model.textController.text,
-                                                videoUrl:
-                                                    _model.finalStaticVideo,
-                                                videoDescription:
-                                                    _model.videoDescription,
-                                                timeStamp: getCurrentTimestamp,
-                                                isPublic: false,
-                                              ));
-                                              _model.videoDocStatic = VideosRecord
-                                                  .getDocumentFromData(
-                                                      createVideosRecordData(
-                                                        userRef:
-                                                            currentUserReference,
-                                                        prompt: _model
-                                                            .textController
-                                                            .text,
-                                                        videoUrl: _model
-                                                            .finalStaticVideo,
-                                                        videoDescription: _model
-                                                            .videoDescription,
-                                                        timeStamp:
-                                                            getCurrentTimestamp,
-                                                        isPublic: false,
-                                                      ),
-                                                      videosRecordReference2);
-                                              shouldSetState = true;
-                                              setState(() {
-                                                _model.textController?.clear();
-                                              });
-
-                                              context.pushNamed(
-                                                'GeneratedVideoPage',
-                                                queryParameters: {
-                                                  'videoDoc': serializeParam(
-                                                    _model.videoDocStatic,
-                                                    ParamType.Document,
-                                                  ),
-                                                }.withoutNulls,
-                                                extra: <String, dynamic>{
-                                                  'videoDoc':
-                                                      _model.videoDocStatic,
-                                                },
-                                              );
-
-                                              if (shouldSetState) {
-                                                setState(() {});
-                                              }
-                                              return;
-                                            }
-                                          } else {
-                                            if (shouldSetState) {
-                                              setState(() {});
-                                            }
-                                            return;
-                                          }
-                                        } else {
-                                          setState(() {
-                                            _model.imagePath = [];
-                                            _model.videoPath = [];
-                                            _model.generationId = [];
-                                            _model.isImageGenerating = true;
-                                            _model.isLoading = true;
-                                            _model.jsonData =
-                                                FFAppState().emptyJson;
-                                            _model.hits = 0;
-                                          });
-                                          await geminiGenerateText(
+                                        }
+                                        _model.hits = _model.hits + 1;
+                                      }),
+                                    ]);
+                                    if (_model.hits ==
+                                        _model.parallalApiCount) {
+                                      setState(() {
+                                        _model.hits = 0;
+                                      });
+                                      await Future.wait([
+                                        Future(() async {
+                                          _model.imageJson1 = await _model
+                                              .generateImageFromGenId(
                                             context,
-                                            'Action to Do:   ${_model.textController.text}. write me ${_model.parallalApiCount.toString()} Image Generation Prompts in a single line separated with \"|\" to Help Complete the Action in order:',
-                                          ).then((generatedText) {
-                                            safeSetState(() => _model
-                                                .imgGenPrompt = generatedText);
-                                          });
-
+                                            genId: functions.getJsonValue(
+                                                _model.jsonData!, '0'),
+                                            index: 0,
+                                          );
                                           shouldSetState = true;
-                                          await Future.wait([
-                                            Future(() async {
-                                              _model.genImage1 =
-                                                  await _model.generateGenId(
-                                                context,
-                                                prompt: valueOrDefault<String>(
-                                                  functions.getPrompt(
-                                                      _model.imgGenPrompt!, 0),
-                                                  'NA',
-                                                ),
-                                              );
-                                              shouldSetState = true;
-                                              if (!(_model.genImage1 == null ||
-                                                  _model.genImage1 == '')) {
-                                                setState(() {
-                                                  _model.jsonData =
-                                                      functions.newJsonValue(
-                                                          _model.jsonData!,
-                                                          '0',
-                                                          _model.genImage1!);
-                                                });
-                                              }
-                                              _model.hits = _model.hits + 1;
-                                            }),
-                                            Future(() async {
-                                              _model.genImage2 =
-                                                  await _model.generateGenId(
-                                                context,
-                                                prompt: functions.getPrompt(
-                                                    _model.imgGenPrompt!, 1),
-                                              );
-                                              shouldSetState = true;
-                                              if (!(_model.genImage2 == null ||
-                                                  _model.genImage2 == '')) {
-                                                setState(() {
-                                                  _model.jsonData =
-                                                      functions.newJsonValue(
-                                                          _model.jsonData!,
-                                                          '1',
-                                                          _model.genImage2!);
-                                                });
-                                              }
-                                              _model.hits = _model.hits + 1;
-                                            }),
-                                          ]);
-                                          if (_model.hits ==
-                                              _model.parallalApiCount) {
-                                            setState(() {
-                                              _model.hits = 0;
-                                            });
-                                            await Future.wait([
-                                              Future(() async {
-                                                _model.imageJson1 = await _model
-                                                    .generateImageFromGenId(
-                                                  context,
-                                                  genId: functions.getJsonValue(
-                                                      _model.jsonData!, '0'),
-                                                  index: 0,
-                                                );
-                                                shouldSetState = true;
-                                                if (_model.imageJson1 == null) {
-                                                  ScaffoldMessenger.of(context)
-                                                      .showSnackBar(
-                                                    SnackBar(
-                                                      content: Text(
-                                                        _model.imageJson1!
-                                                            .toString(),
-                                                        style: TextStyle(
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primaryText,
-                                                        ),
-                                                      ),
-                                                      duration: const Duration(
-                                                          milliseconds: 4000),
-                                                      backgroundColor:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .secondary,
-                                                    ),
-                                                  );
-                                                  if (shouldSetState) {
-                                                    setState(() {});
-                                                  }
-                                                  return;
-                                                } else {
-                                                  setState(() {
-                                                    _model.addToImagePath(
-                                                        getJsonField(
-                                                      _model.imageJson1,
-                                                      r'''$.url''',
-                                                    ).toString());
-                                                    _model.addToImgId(
-                                                        getJsonField(
-                                                      _model.imageJson1,
-                                                      r'''$.id''',
-                                                    ).toString());
-                                                  });
-                                                  setState(() {
-                                                    _model.hits =
-                                                        _model.hits + 1;
-                                                  });
-                                                }
-                                              }),
-                                              Future(() async {
-                                                _model.imageJson2 = await _model
-                                                    .generateImageFromGenId(
-                                                  context,
-                                                  genId: functions.getJsonValue(
-                                                      _model.jsonData!, '1'),
-                                                  index: 1,
-                                                );
-                                                shouldSetState = true;
-                                                if (_model.imageJson2 == null) {
-                                                  ScaffoldMessenger.of(context)
-                                                      .showSnackBar(
-                                                    SnackBar(
-                                                      content: Text(
-                                                        _model.imageJson2!
-                                                            .toString(),
-                                                        style: TextStyle(
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primaryText,
-                                                        ),
-                                                      ),
-                                                      duration: const Duration(
-                                                          milliseconds: 4000),
-                                                      backgroundColor:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .secondary,
-                                                    ),
-                                                  );
-                                                  if (shouldSetState) {
-                                                    setState(() {});
-                                                  }
-                                                  return;
-                                                } else {
-                                                  setState(() {
-                                                    _model.addToImagePath(
-                                                        getJsonField(
-                                                      _model.imageJson2,
-                                                      r'''$.url''',
-                                                    ).toString());
-                                                    _model.addToImgId(
-                                                        getJsonField(
-                                                      _model.imageJson2,
-                                                      r'''$.id''',
-                                                    ).toString());
-                                                  });
-                                                  setState(() {
-                                                    _model.hits =
-                                                        _model.hits + 1;
-                                                  });
-                                                }
-                                              }),
-                                              Future(() async {
-                                                await _model
-                                                    .audioGenerationAction(
-                                                        context);
-                                                setState(() {});
-                                                setState(() {
-                                                  _model.hits = _model.hits + 1;
-                                                });
-                                              }),
-                                            ]);
-                                            if (_model.hits ==
-                                                (_model.parallalApiCount + 1)) {
-                                              setState(() {
-                                                _model.addToImageURLList('END');
-                                              });
-                                              await _model.videoGeneratorAction(
-                                                  context);
-                                              setState(() {});
-                                              if (_model.isLiveAudio) {
-                                                _model.finalVideoLiveAudio =
-                                                    await actions.addVideos(
-                                                  _model.videoPath.toList(),
-                                                  _model.audioFile,
-                                                );
-                                                shouldSetState = true;
-                                                setState(() {
-                                                  _model.isImageGenerating =
-                                                      false;
-                                                  _model.isLoading = false;
-                                                });
-
-                                                var videosRecordReference3 =
-                                                    VideosRecord.collection
-                                                        .doc();
-                                                await videosRecordReference3
-                                                    .set(createVideosRecordData(
-                                                  userRef: currentUserReference,
-                                                  prompt: _model
-                                                      .textController.text,
-                                                  videoUrl: _model
-                                                      .finalVideoLiveAudio,
-                                                  videoDescription:
-                                                      _model.videoDescription,
-                                                  timeStamp:
-                                                      getCurrentTimestamp,
-                                                  isPublic: false,
-                                                ));
-                                                _model.videoDocLive = VideosRecord
-                                                    .getDocumentFromData(
-                                                        createVideosRecordData(
-                                                          userRef:
-                                                              currentUserReference,
-                                                          prompt: _model
-                                                              .textController
-                                                              .text,
-                                                          videoUrl: _model
-                                                              .finalVideoLiveAudio,
-                                                          videoDescription: _model
-                                                              .videoDescription,
-                                                          timeStamp:
-                                                              getCurrentTimestamp,
-                                                          isPublic: false,
-                                                        ),
-                                                        videosRecordReference3);
-                                                shouldSetState = true;
-                                                setState(() {
-                                                  _model.textController
-                                                      ?.clear();
-                                                });
-
-                                                context.pushNamed(
-                                                  'GeneratedVideoPage',
-                                                  queryParameters: {
-                                                    'videoDoc': serializeParam(
-                                                      _model.videoDocLive,
-                                                      ParamType.Document,
-                                                    ),
-                                                  }.withoutNulls,
-                                                  extra: <String, dynamic>{
-                                                    'videoDoc':
-                                                        _model.videoDocLive,
-                                                  },
-                                                );
-
-                                                if (shouldSetState) {
-                                                  setState(() {});
-                                                }
-                                                return;
-                                              } else {
-                                                _model.finalVideo =
-                                                    await actions.addVideos(
-                                                  _model.videoPath.toList(),
-                                                  null,
-                                                );
-                                                shouldSetState = true;
-                                                setState(() {
-                                                  _model.isImageGenerating =
-                                                      false;
-                                                  _model.isLoading = false;
-                                                });
-
-                                                var videosRecordReference4 =
-                                                    VideosRecord.collection
-                                                        .doc();
-                                                await videosRecordReference4
-                                                    .set(createVideosRecordData(
-                                                  userRef: currentUserReference,
-                                                  prompt: _model
-                                                      .textController.text,
-                                                  videoUrl: _model.finalVideo,
-                                                  videoDescription:
-                                                      _model.videoDescription,
-                                                  timeStamp:
-                                                      getCurrentTimestamp,
-                                                  isPublic: false,
-                                                ));
-                                                _model.videoDoc = VideosRecord
-                                                    .getDocumentFromData(
-                                                        createVideosRecordData(
-                                                          userRef:
-                                                              currentUserReference,
-                                                          prompt: _model
-                                                              .textController
-                                                              .text,
-                                                          videoUrl:
-                                                              _model.finalVideo,
-                                                          videoDescription: _model
-                                                              .videoDescription,
-                                                          timeStamp:
-                                                              getCurrentTimestamp,
-                                                          isPublic: false,
-                                                        ),
-                                                        videosRecordReference4);
-                                                shouldSetState = true;
-                                                setState(() {
-                                                  _model.textController
-                                                      ?.clear();
-                                                });
-
-                                                context.pushNamed(
-                                                  'GeneratedVideoPage',
-                                                  queryParameters: {
-                                                    'videoDoc': serializeParam(
-                                                      _model.videoDoc,
-                                                      ParamType.Document,
-                                                    ),
-                                                  }.withoutNulls,
-                                                  extra: <String, dynamic>{
-                                                    'videoDoc': _model.videoDoc,
-                                                  },
-                                                );
-
-                                                if (shouldSetState) {
-                                                  setState(() {});
-                                                }
-                                                return;
-                                              }
-                                            } else {
-                                              if (shouldSetState) {
-                                                setState(() {});
-                                              }
-                                              return;
-                                            }
-                                          } else {
+                                          if (_model.imageJson1 == null) {
                                             ScaffoldMessenger.of(context)
                                                 .showSnackBar(
                                               SnackBar(
                                                 content: Text(
-                                                  'Hit count:- ${_model.hits.toString()}',
+                                                  _model.imageJson1!.toString(),
                                                   style: TextStyle(
                                                     color: FlutterFlowTheme.of(
                                                             context)
@@ -1034,11 +464,242 @@ class _VideoPromptPageWidgetState extends State<VideoPromptPageWidget> {
                                               setState(() {});
                                             }
                                             return;
+                                          } else {
+                                            setState(() {
+                                              _model
+                                                  .addToImagePath(getJsonField(
+                                                _model.imageJson1,
+                                                r'''$.url''',
+                                              ).toString());
+                                              _model.addToImgId(getJsonField(
+                                                _model.imageJson1,
+                                                r'''$.id''',
+                                              ).toString());
+                                            });
+                                            setState(() {
+                                              _model.hits = _model.hits + 1;
+                                            });
                                           }
-                                        }
+                                        }),
+                                        Future(() async {
+                                          _model.imageJson2 = await _model
+                                              .generateImageFromGenId(
+                                            context,
+                                            genId: functions.getJsonValue(
+                                                _model.jsonData!, '1'),
+                                            index: 1,
+                                          );
+                                          shouldSetState = true;
+                                          if (_model.imageJson2 == null) {
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              SnackBar(
+                                                content: Text(
+                                                  _model.imageJson2!.toString(),
+                                                  style: TextStyle(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryText,
+                                                  ),
+                                                ),
+                                                duration: const Duration(
+                                                    milliseconds: 4000),
+                                                backgroundColor:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondary,
+                                              ),
+                                            );
+                                            if (shouldSetState) {
+                                              setState(() {});
+                                            }
+                                            return;
+                                          } else {
+                                            setState(() {
+                                              _model
+                                                  .addToImagePath(getJsonField(
+                                                _model.imageJson2,
+                                                r'''$.url''',
+                                              ).toString());
+                                              _model.addToImgId(getJsonField(
+                                                _model.imageJson2,
+                                                r'''$.id''',
+                                              ).toString());
+                                            });
+                                            setState(() {
+                                              _model.hits = _model.hits + 1;
+                                            });
+                                          }
+                                        }),
+                                        Future(() async {
+                                          await _model
+                                              .audioGenerationAction(context);
+                                          setState(() {});
+                                          setState(() {
+                                            _model.hits = _model.hits + 1;
+                                          });
+                                        }),
+                                      ]);
+                                      if (_model.hits ==
+                                          (_model.parallalApiCount + 1)) {
+                                        setState(() {
+                                          _model.addToImageURLList('END');
+                                        });
+                                        await _model
+                                            .videoGeneratorAction(context);
+                                        setState(() {});
+                                        if (_model.isLiveAudio) {
+                                          _model.finalVideoLiveAudio =
+                                              await actions.addVideos(
+                                            _model.videoPath.toList(),
+                                            _model.audioFile,
+                                          );
+                                          shouldSetState = true;
+                                          setState(() {
+                                            _model.isImageGenerating = false;
+                                            _model.isLoading = false;
+                                          });
 
+                                          var videosRecordReference1 =
+                                              VideosRecord.collection.doc();
+                                          await videosRecordReference1
+                                              .set(createVideosRecordData(
+                                            userRef: currentUserReference,
+                                            prompt: _model.textController.text,
+                                            videoUrl:
+                                                _model.finalVideoLiveAudio,
+                                            videoDescription:
+                                                _model.videoDescription,
+                                            timeStamp: getCurrentTimestamp,
+                                            isPublic: false,
+                                          ));
+                                          _model.videoDocLive =
+                                              VideosRecord.getDocumentFromData(
+                                                  createVideosRecordData(
+                                                    userRef:
+                                                        currentUserReference,
+                                                    prompt: _model
+                                                        .textController.text,
+                                                    videoUrl: _model
+                                                        .finalVideoLiveAudio,
+                                                    videoDescription:
+                                                        _model.videoDescription,
+                                                    timeStamp:
+                                                        getCurrentTimestamp,
+                                                    isPublic: false,
+                                                  ),
+                                                  videosRecordReference1);
+                                          shouldSetState = true;
+                                          setState(() {
+                                            _model.textController?.clear();
+                                          });
+                                          Navigator.pop(context);
+
+                                          context.pushNamed(
+                                            'GeneratedVideoPage',
+                                            queryParameters: {
+                                              'videoDoc': serializeParam(
+                                                _model.videoDocLive,
+                                                ParamType.Document,
+                                              ),
+                                            }.withoutNulls,
+                                            extra: <String, dynamic>{
+                                              'videoDoc': _model.videoDocLive,
+                                            },
+                                          );
+
+                                          if (shouldSetState) setState(() {});
+                                          return;
+                                        } else {
+                                          _model.finalVideo =
+                                              await actions.addVideos(
+                                            _model.videoPath.toList(),
+                                            null,
+                                          );
+                                          shouldSetState = true;
+                                          setState(() {
+                                            _model.isImageGenerating = false;
+                                            _model.isLoading = false;
+                                          });
+
+                                          var videosRecordReference2 =
+                                              VideosRecord.collection.doc();
+                                          await videosRecordReference2
+                                              .set(createVideosRecordData(
+                                            userRef: currentUserReference,
+                                            prompt: _model.textController.text,
+                                            videoUrl: _model.finalVideo,
+                                            videoDescription:
+                                                _model.videoDescription,
+                                            timeStamp: getCurrentTimestamp,
+                                            isPublic: false,
+                                          ));
+                                          _model.videoDoc =
+                                              VideosRecord.getDocumentFromData(
+                                                  createVideosRecordData(
+                                                    userRef:
+                                                        currentUserReference,
+                                                    prompt: _model
+                                                        .textController.text,
+                                                    videoUrl: _model.finalVideo,
+                                                    videoDescription:
+                                                        _model.videoDescription,
+                                                    timeStamp:
+                                                        getCurrentTimestamp,
+                                                    isPublic: false,
+                                                  ),
+                                                  videosRecordReference2);
+                                          shouldSetState = true;
+                                          setState(() {
+                                            _model.textController?.clear();
+                                          });
+                                          Navigator.pop(context);
+
+                                          context.pushNamed(
+                                            'GeneratedVideoPage',
+                                            queryParameters: {
+                                              'videoDoc': serializeParam(
+                                                _model.videoDoc,
+                                                ParamType.Document,
+                                              ),
+                                            }.withoutNulls,
+                                            extra: <String, dynamic>{
+                                              'videoDoc': _model.videoDoc,
+                                            },
+                                          );
+
+                                          if (shouldSetState) setState(() {});
+                                          return;
+                                        }
+                                      } else {
                                         if (shouldSetState) setState(() {});
-                                      },
+                                        return;
+                                      }
+                                    } else {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        SnackBar(
+                                          content: Text(
+                                            'Hit count:- ${_model.hits.toString()}',
+                                            style: TextStyle(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryText,
+                                            ),
+                                          ),
+                                          duration:
+                                              const Duration(milliseconds: 4000),
+                                          backgroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .secondary,
+                                        ),
+                                      );
+                                      if (shouldSetState) setState(() {});
+                                      return;
+                                    }
+                                  }
+
+                                  if (shouldSetState) setState(() {});
+                                },
                                 text: FFLocalizations.of(context).getText(
                                   'm016gkdc' /* Go */,
                                 ),
@@ -1073,18 +734,6 @@ class _VideoPromptPageWidgetState extends State<VideoPromptPageWidget> {
                   ],
                 ),
               ),
-              if (_model.isLoading)
-                Align(
-                  alignment: const AlignmentDirectional(0.0, 0.0),
-                  child: wrapWithModel(
-                    model: _model.promptToVideoLoaderModel,
-                    updateCallback: () => setState(() {}),
-                    child: PromptToVideoLoaderWidget(
-                      height: MediaQuery.sizeOf(context).width,
-                      width: MediaQuery.sizeOf(context).height,
-                    ),
-                  ),
-                ),
             ],
           ),
         ),

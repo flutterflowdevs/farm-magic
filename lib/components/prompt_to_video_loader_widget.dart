@@ -51,8 +51,8 @@ class _PromptToVideoLoaderWidgetState extends State<PromptToVideoLoaderWidget> {
         color: FlutterFlowTheme.of(context).secondaryBackground,
         borderRadius: BorderRadius.circular(10.0),
       ),
-      child: Lottie.network(
-        'https://assets2.lottiefiles.com/packages/lf20_aZTdD5.json',
+      child: Lottie.asset(
+        'assets/lottie_animations/Animation_-_1714209062580_(1).json',
         width: MediaQuery.sizeOf(context).width * 0.5,
         height: MediaQuery.sizeOf(context).height * 0.5,
         fit: BoxFit.contain,
