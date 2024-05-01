@@ -1,6 +1,6 @@
 import '/app_components/profile_options/profile_options_widget.dart';
-import '/app_components/select_language/select_language_widget.dart';
 import '/auth/firebase_auth/auth_util.dart';
+import '/components/language_selection_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
@@ -189,7 +189,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                         : FocusScope.of(context).unfocus(),
                                     child: Padding(
                                       padding: MediaQuery.viewInsetsOf(context),
-                                      child: const SelectLanguageWidget(),
+                                      child: const LanguageSelectionWidget(),
                                     ),
                                   );
                                 },

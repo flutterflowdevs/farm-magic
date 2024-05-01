@@ -1,3 +1,4 @@
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_video_player.dart';
@@ -8,10 +9,10 @@ export 'generated_video_page_model.dart';
 class GeneratedVideoPageWidget extends StatefulWidget {
   const GeneratedVideoPageWidget({
     super.key,
-    required this.videoUrls,
+    required this.videoDoc,
   });
 
-  final String? videoUrls;
+  final VideosRecord? videoDoc;
 
   @override
   State<GeneratedVideoPageWidget> createState() =>
@@ -47,7 +48,7 @@ class _GeneratedVideoPageWidgetState extends State<GeneratedVideoPageWidget> {
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         appBar: AppBar(
           backgroundColor: FlutterFlowTheme.of(context).primary,
-          automaticallyImplyLeading: false,
+          automaticallyImplyLeading: true,
           title: Text(
             FFLocalizations.of(context).getText(
               '2iy66jom' /* Generated Video Page */,
@@ -65,14 +66,36 @@ class _GeneratedVideoPageWidgetState extends State<GeneratedVideoPageWidget> {
         ),
         body: SafeArea(
           top: true,
-          child: FlutterFlowVideoPlayer(
-            path: widget.videoUrls!,
-            videoType: VideoType.network,
-            autoPlay: false,
-            looping: true,
-            showControls: true,
-            allowFullScreen: true,
-            allowPlaybackSpeedMenu: false,
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                FlutterFlowVideoPlayer(
+                  path: widget.videoDoc!.videoUrl,
+                  videoType: VideoType.network,
+                  autoPlay: false,
+                  looping: true,
+                  showControls: true,
+                  allowFullScreen: true,
+                  allowPlaybackSpeedMenu: false,
+                ),
+                Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(22.0, 0.0, 22.0, 0.0),
+                  child: Text(
+                    valueOrDefault<String>(
+                      widget.videoDoc?.videoDescription,
+                      'video static description',
+                    ),
+                    textAlign: TextAlign.center,
+                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                          fontFamily: 'Readex Pro',
+                          fontSize: 16.0,
+                          letterSpacing: 0.0,
+                        ),
+                  ),
+                ),
+              ].divide(const SizedBox(height: 12.0)),
+            ),
           ),
         ),
       ),

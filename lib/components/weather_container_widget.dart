@@ -389,8 +389,13 @@ class _WeatherContainerWidgetState extends State<WeatherContainerWidget>
                                                       ],
                                                     ),
                                                     Text(
-                                                      weatherItem.todayTemp
-                                                          .toString(),
+                                                      formatNumber(
+                                                        weatherItem.todayTemp,
+                                                        formatType:
+                                                            FormatType.custom,
+                                                        format: '###',
+                                                        locale: 'en_US',
+                                                      ),
                                                       style: FlutterFlowTheme
                                                               .of(context)
                                                           .bodyMedium
@@ -464,7 +469,12 @@ class _WeatherContainerWidgetState extends State<WeatherContainerWidget>
                                               ),
                                             ),
                                             Text(
-                                              weatherItem.todayTemp.toString(),
+                                              formatNumber(
+                                                weatherItem.todayTemp,
+                                                formatType: FormatType.custom,
+                                                format: '###',
+                                                locale: 'en_US',
+                                              ),
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium

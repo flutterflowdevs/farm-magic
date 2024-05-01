@@ -59,7 +59,7 @@ class _MyAppState extends State<MyApp> {
       ..listen((user) => _appStateNotifier.update(user));
     jwtTokenStream.listen((_) {});
     Future.delayed(
-      const Duration(milliseconds: 2300),
+      const Duration(milliseconds: 1000),
       () => _appStateNotifier.stopShowingSplashImage(),
     );
   }
@@ -94,7 +94,8 @@ class _MyAppState extends State<MyApp> {
       supportedLocales: const [
         Locale('en'),
         Locale('hi'),
-        Locale('ta'),
+        Locale('pt'),
+        Locale('sw'),
       ],
       theme: ThemeData(
         brightness: Brightness.light,

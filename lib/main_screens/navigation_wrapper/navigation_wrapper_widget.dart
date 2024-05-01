@@ -4,6 +4,7 @@ import '/custom_code/widgets/index.dart' as custom_widgets;
 import '/flutter_flow/permissions_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:provider/provider.dart';
 import 'navigation_wrapper_model.dart';
 export 'navigation_wrapper_model.dart';
 
@@ -40,6 +41,8 @@ class _NavigationWrapperWidgetState extends State<NavigationWrapperWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -49,9 +52,10 @@ class _NavigationWrapperWidgetState extends State<NavigationWrapperWidget> {
         child: Scaffold(
           key: scaffoldKey,
           backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-          body: const custom_widgets.NavigationPage(
+          body: custom_widgets.NavigationPage(
             width: double.infinity,
             height: double.infinity,
+            selectedLanguageCode: FFAppState().selectedLanguageCode,
           ),
         ),
       ),
