@@ -9,6 +9,7 @@ import 'schema/users_record.dart';
 import 'schema/chats_record.dart';
 import 'schema/diagnoses_record.dart';
 import 'schema/weather_record.dart';
+import 'schema/videos_record.dart';
 
 export 'dart:async' show StreamSubscription;
 export 'package:cloud_firestore/cloud_firestore.dart';
@@ -21,6 +22,7 @@ export 'schema/users_record.dart';
 export 'schema/chats_record.dart';
 export 'schema/diagnoses_record.dart';
 export 'schema/weather_record.dart';
+export 'schema/videos_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
 Future<int> queryUsersRecordCount({
@@ -165,6 +167,43 @@ Future<List<WeatherRecord>> queryWeatherRecordOnce({
     queryCollectionOnce(
       WeatherRecord.collection,
       WeatherRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+/// Functions to query VideosRecords (as a Stream and as a Future).
+Future<int> queryVideosRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      VideosRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<VideosRecord>> queryVideosRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      VideosRecord.collection,
+      VideosRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<VideosRecord>> queryVideosRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      VideosRecord.collection,
+      VideosRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,

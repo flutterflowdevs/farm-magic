@@ -29,10 +29,16 @@ class ChatsRecord extends FirestoreRecord {
   DocumentReference? get userRef => _userRef;
   bool hasUserRef() => _userRef != null;
 
+  // "audio_url" field.
+  String? _audioUrl;
+  String get audioUrl => _audioUrl ?? '';
+  bool hasAudioUrl() => _audioUrl != null;
+
   void _initializeFields() {
     _chatData = ChatMessageStruct.maybeFromMap(snapshotData['chat_data']);
     _timeStamp = snapshotData['time_stamp'] as DateTime?;
     _userRef = snapshotData['user_ref'] as DocumentReference?;
+    _audioUrl = snapshotData['audio_url'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -72,12 +78,14 @@ Map<String, dynamic> createChatsRecordData({
   ChatMessageStruct? chatData,
   DateTime? timeStamp,
   DocumentReference? userRef,
+  String? audioUrl,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'chat_data': ChatMessageStruct().toMap(),
       'time_stamp': timeStamp,
       'user_ref': userRef,
+      'audio_url': audioUrl,
     }.withoutNulls,
   );
 
@@ -94,12 +102,13 @@ class ChatsRecordDocumentEquality implements Equality<ChatsRecord> {
   bool equals(ChatsRecord? e1, ChatsRecord? e2) {
     return e1?.chatData == e2?.chatData &&
         e1?.timeStamp == e2?.timeStamp &&
-        e1?.userRef == e2?.userRef;
+        e1?.userRef == e2?.userRef &&
+        e1?.audioUrl == e2?.audioUrl;
   }
 
   @override
-  int hash(ChatsRecord? e) =>
-      const ListEquality().hash([e?.chatData, e?.timeStamp, e?.userRef]);
+  int hash(ChatsRecord? e) => const ListEquality()
+      .hash([e?.chatData, e?.timeStamp, e?.userRef, e?.audioUrl]);
 
   @override
   bool isValidKey(Object? o) => o is ChatsRecord;

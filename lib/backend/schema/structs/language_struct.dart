@@ -10,9 +10,11 @@ class LanguageStruct extends FFFirebaseStruct {
   LanguageStruct({
     String? langName,
     String? langCode,
+    String? image,
     FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _langName = langName,
         _langCode = langCode,
+        _image = image,
         super(firestoreUtilData);
 
   // "lang_name" field.
@@ -27,9 +29,16 @@ class LanguageStruct extends FFFirebaseStruct {
   set langCode(String? val) => _langCode = val;
   bool hasLangCode() => _langCode != null;
 
+  // "image" field.
+  String? _image;
+  String get image => _image ?? '';
+  set image(String? val) => _image = val;
+  bool hasImage() => _image != null;
+
   static LanguageStruct fromMap(Map<String, dynamic> data) => LanguageStruct(
         langName: data['lang_name'] as String?,
         langCode: data['lang_code'] as String?,
+        image: data['image'] as String?,
       );
 
   static LanguageStruct? maybeFromMap(dynamic data) =>
@@ -38,6 +47,7 @@ class LanguageStruct extends FFFirebaseStruct {
   Map<String, dynamic> toMap() => {
         'lang_name': _langName,
         'lang_code': _langCode,
+        'image': _image,
       }.withoutNulls;
 
   @override
@@ -48,6 +58,10 @@ class LanguageStruct extends FFFirebaseStruct {
         ),
         'lang_code': serializeParam(
           _langCode,
+          ParamType.String,
+        ),
+        'image': serializeParam(
+          _image,
           ParamType.String,
         ),
       }.withoutNulls;
@@ -64,6 +78,11 @@ class LanguageStruct extends FFFirebaseStruct {
           ParamType.String,
           false,
         ),
+        image: deserializeParam(
+          data['image'],
+          ParamType.String,
+          false,
+        ),
       );
 
   @override
@@ -73,16 +92,18 @@ class LanguageStruct extends FFFirebaseStruct {
   bool operator ==(Object other) {
     return other is LanguageStruct &&
         langName == other.langName &&
-        langCode == other.langCode;
+        langCode == other.langCode &&
+        image == other.image;
   }
 
   @override
-  int get hashCode => const ListEquality().hash([langName, langCode]);
+  int get hashCode => const ListEquality().hash([langName, langCode, image]);
 }
 
 LanguageStruct createLanguageStruct({
   String? langName,
   String? langCode,
+  String? image,
   Map<String, dynamic> fieldValues = const {},
   bool clearUnsetFields = true,
   bool create = false,
@@ -91,6 +112,7 @@ LanguageStruct createLanguageStruct({
     LanguageStruct(
       langName: langName,
       langCode: langCode,
+      image: image,
       firestoreUtilData: FirestoreUtilData(
         clearUnsetFields: clearUnsetFields,
         create: create,

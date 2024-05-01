@@ -15,6 +15,8 @@ import 'index.dart'; // Imports other custom widgets
 
 import 'index.dart'; // Imports other custom widgets
 
+import 'index.dart'; // Imports other custom widgets
+
 import 'package:farm_magic/index.dart';
 import 'package:animated_notch_bottom_bar/animated_notch_bottom_bar/animated_notch_bottom_bar.dart';
 
@@ -23,10 +25,12 @@ class NavigationPage extends StatefulWidget {
     super.key,
     this.width,
     this.height,
+    required this.selectedLanguageCode,
   });
 
   final double? width;
   final double? height;
+  final String selectedLanguageCode;
 
   @override
   State<NavigationPage> createState() => _NavigationPageState();
@@ -38,6 +42,13 @@ class _NavigationPageState extends State<NavigationPage> {
 
   /// Controller to handle bottom nav bar and also handles initial page
   final _controller = NotchBottomBarController(index: 0);
+
+  final dynamic languageData = {
+    "en": {"home": "Home", "chat": "Message", "profile": "Profile"},
+    "hi": {"home": "घर", "chat": "संदेश", "profile": "प्रोफ़ाइल"},
+    "pt": {"home": "Lar", "chat": "Mensagem", "profile": "Perfil"},
+    "sw": {"home": "Nyumbani", "chat": "Ujumbe", "profile": "Wasifu"}
+  };
 
   int maxCount = 3;
 
@@ -90,21 +101,22 @@ class _NavigationPageState extends State<NavigationPage> {
               /// restart app if you change removeMargins
               removeMargins: false,
               bottomBarWidth: 500,
-              showShadow: false,
+              showShadow: true,
               durationInMilliSeconds: 300,
               elevation: 1,
               bottomBarItems: [
                 BottomBarItem(
                     inActiveItem: Icon(
-                      Icons.add_home_outlined,
+                      Icons.home_outlined,
                       color: inactiveColor,
                       size: 32,
                     ),
                     activeItem: Icon(
-                      Icons.add_home_outlined,
+                      Icons.home_outlined,
                       color: activeColor,
                     ),
-                    itemLabelWidget: text("Home")),
+                    itemLabelWidget: text(
+                        languageData[widget.selectedLanguageCode]["home"])),
                 BottomBarItem(
                     inActiveItem: Icon(
                       Icons.chat_outlined,
@@ -115,7 +127,8 @@ class _NavigationPageState extends State<NavigationPage> {
                       Icons.chat_outlined,
                       color: activeColor,
                     ),
-                    itemLabelWidget: text("Chat")),
+                    itemLabelWidget: text(
+                        languageData[widget.selectedLanguageCode]["chat"])),
                 BottomBarItem(
                     inActiveItem: Icon(
                       Icons.person_outline,
@@ -126,7 +139,8 @@ class _NavigationPageState extends State<NavigationPage> {
                       Icons.person_outline,
                       color: activeColor,
                     ),
-                    itemLabelWidget: text("Profile")),
+                    itemLabelWidget: text(
+                        languageData[widget.selectedLanguageCode]["profile"])),
               ],
               onTap: (index) {
                 /// perform action on tab change and to update pages you can update pages without pages
@@ -140,16 +154,14 @@ class _NavigationPageState extends State<NavigationPage> {
 
   Widget text(String title) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 0, left: 8, right: 0, top: 4),
+      padding: const EdgeInsets.only(bottom: 0, left: 0, right: 0, top: 4),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
             title,
-            style: const TextStyle(
-              color: Color(0xffD0B50B),
-            ),
+            style: const TextStyle(color: Color(0xffD0B50B), fontSize: 12),
             textAlign: TextAlign.center,
           ),
         ],

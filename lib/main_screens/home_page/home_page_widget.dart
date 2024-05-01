@@ -10,7 +10,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'dart:async';
 import 'package:collection/collection.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -226,16 +225,11 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                       fontWeight: FontWeight.normal,
                                       fontSize: 28.0,
                                     ),
-                                    mouseCursor: SystemMouseCursors.click,
-                                    recognizer: TapGestureRecognizer()
-                                      ..onTap = () async {
-                                        context.pushNamed('HomePageCopy');
-                                      },
                                   ),
                                   TextSpan(
                                     text: FFLocalizations.of(context).getText(
                                       '8h0nglqo' /* 
-Explore Farm Magic  */
+Explore Farm Magic   */
                                       ,
                                     ),
                                     style: GoogleFonts.getFont(

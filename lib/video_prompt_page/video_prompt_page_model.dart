@@ -1,4 +1,6 @@
 import '/backend/api_requests/api_calls.dart';
+import '/backend/backend.dart';
+import '/backend/gemini/gemini.dart';
 import '/components/prompt_to_video_loader_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -84,9 +86,11 @@ class VideoPromptPageModel extends FlutterFlowModel<VideoPromptPageWidget> {
 
   int parallalApiCount = 2;
 
-  bool isLiveAudio = false;
+  bool isLiveAudio = true;
 
   String? audioFile;
+
+  String? videoDescription = 'static default value';
 
   ///  State fields for stateful widgets in this page.
 
@@ -103,8 +107,12 @@ class VideoPromptPageModel extends FlutterFlowModel<VideoPromptPageWidget> {
   dynamic dimageJson2;
   // Stores action output result for [Custom Action - addVideos] action in Button widget.
   String? finalStaticVideoLiveAudio;
+  // Stores action output result for [Backend Call - Create Document] action in Button widget.
+  VideosRecord? videoDocStaticLive;
   // Stores action output result for [Custom Action - addVideos] action in Button widget.
   String? finalStaticVideo;
+  // Stores action output result for [Backend Call - Create Document] action in Button widget.
+  VideosRecord? videoDocStatic;
   // Stores action output result for [Gemini - Generate Text] action in Button widget.
   String? imgGenPrompt;
   // Stores action output result for [Action Block - GenerateGenId] action in Button widget.
@@ -117,8 +125,12 @@ class VideoPromptPageModel extends FlutterFlowModel<VideoPromptPageWidget> {
   dynamic imageJson2;
   // Stores action output result for [Custom Action - addVideos] action in Button widget.
   String? finalVideoLiveAudio;
+  // Stores action output result for [Backend Call - Create Document] action in Button widget.
+  VideosRecord? videoDocLive;
   // Stores action output result for [Custom Action - addVideos] action in Button widget.
   String? finalVideo;
+  // Stores action output result for [Backend Call - Create Document] action in Button widget.
+  VideosRecord? videoDoc;
   // Model for PromptToVideoLoader component.
   late PromptToVideoLoaderModel promptToVideoLoaderModel;
 
@@ -295,9 +307,7 @@ class VideoPromptPageModel extends FlutterFlowModel<VideoPromptPageWidget> {
         }),
       ]);
       if (hits == parallalApiCount) {
-        isImageGenerating = false;
         addToImageURLList('END');
-        isLoading = false;
         return;
       } else {
         return;
@@ -421,13 +431,36 @@ class VideoPromptPageModel extends FlutterFlowModel<VideoPromptPageWidget> {
         }),
       ]);
       if (hits == parallalApiCount) {
-        isImageGenerating = false;
         addToImageURLList('END');
-        isLoading = false;
         return;
       } else {
         return;
       }
+    }
+  }
+
+  Future audioGenerationAction(BuildContext context) async {
+    String? videoDescriptionText;
+    ApiCallResponse? ttsOutput;
+
+    await geminiGenerateText(
+      context,
+      'give me answer for the question \"${textController.text}\", under 300 character',
+    ).then((generatedText) {
+      videoDescriptionText = generatedText;
+    });
+
+    videoDescription = functions.removeSpecialCharacters(videoDescriptionText!);
+    ttsOutput = await BuildshipAPIsGroup.textToAudioCall.call(
+      text: functions.removeSpecialCharacters(videoDescriptionText!),
+    );
+    if ((ttsOutput.succeeded ?? true)) {
+      audioFile = BuildshipAPIsGroup.textToAudioCall.audioPath(
+        (ttsOutput.jsonBody ?? ''),
+      );
+      return;
+    } else {
+      return;
     }
   }
 }

@@ -589,7 +589,7 @@ class _DiseaseDetectionWidgetState extends State<DiseaseDetectionWidget> {
                                                         FFLocalizations.of(
                                                                 context)
                                                             .getText(
-                                                          'fz3on1v5' /* upload Image */,
+                                                          'fz3on1v5' /* Upload Image */,
                                                         ),
                                                         style:
                                                             FlutterFlowTheme.of(
@@ -1089,267 +1089,296 @@ class _DiseaseDetectionWidgetState extends State<DiseaseDetectionWidget> {
                               ),
                             ),
                           ),
-                          Column(
-                            mainAxisSize: MainAxisSize.max,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    8.0, 8.0, 0.0, 0.0),
-                                child: Text(
-                                  FFLocalizations.of(context).getText(
-                                    'wgk98gg0' /* Uploaded Photo */,
-                                  ),
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: 'Readex Pro',
-                                        fontSize: 16.0,
-                                        letterSpacing: 0.0,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                ),
-                              ),
-                              if (_model.uploadedImageByUser != null &&
-                                  (_model.uploadedImageByUser?.bytes
-                                          ?.isNotEmpty ??
-                                      false))
-                                Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      8.0, 8.0, 0.0, 0.0),
-                                  child: InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      await Navigator.push(
-                                        context,
-                                        PageTransition(
-                                          type: PageTransitionType.fade,
-                                          child: FlutterFlowExpandedImageView(
-                                            image: Image.memory(
-                                              _model.uploadedImageByUser
-                                                      ?.bytes ??
-                                                  Uint8List.fromList([]),
-                                              fit: BoxFit.contain,
+                          Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                0.0, 10.0, 0.0, 10.0),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          8.0, 8.0, 0.0, 0.0),
+                                      child: Text(
+                                        FFLocalizations.of(context).getText(
+                                          'wgk98gg0' /* Uploaded Photo */,
+                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              fontSize: 18.0,
+                                              letterSpacing: 0.0,
+                                              fontWeight: FontWeight.bold,
                                             ),
-                                            allowRotation: false,
+                                      ),
+                                    ),
+                                    if (_model.uploadedImageByUser != null &&
+                                        (_model.uploadedImageByUser?.bytes
+                                                ?.isNotEmpty ??
+                                            false))
+                                      Padding(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                            8.0, 8.0, 0.0, 0.0),
+                                        child: InkWell(
+                                          splashColor: Colors.transparent,
+                                          focusColor: Colors.transparent,
+                                          hoverColor: Colors.transparent,
+                                          highlightColor: Colors.transparent,
+                                          onTap: () async {
+                                            await Navigator.push(
+                                              context,
+                                              PageTransition(
+                                                type: PageTransitionType.fade,
+                                                child:
+                                                    FlutterFlowExpandedImageView(
+                                                  image: Image.memory(
+                                                    _model.uploadedImageByUser
+                                                            ?.bytes ??
+                                                        Uint8List.fromList([]),
+                                                    fit: BoxFit.contain,
+                                                  ),
+                                                  allowRotation: false,
+                                                  tag: 'imageTag4',
+                                                  useHeroAnimation: true,
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                          child: Hero(
                                             tag: 'imageTag4',
-                                            useHeroAnimation: true,
+                                            transitionOnUserGestures: true,
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                              child: Image.memory(
+                                                _model.uploadedImageByUser
+                                                        ?.bytes ??
+                                                    Uint8List.fromList([]),
+                                                width: 100.0,
+                                                height: 100.0,
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
                                           ),
                                         ),
-                                      );
-                                    },
-                                    child: Hero(
-                                      tag: 'imageTag4',
-                                      transitionOnUserGestures: true,
-                                      child: ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                        child: Image.memory(
-                                          _model.uploadedImageByUser?.bytes ??
-                                              Uint8List.fromList([]),
-                                          width: 100.0,
-                                          height: 100.0,
-                                          fit: BoxFit.cover,
-                                        ),
                                       ),
-                                    ),
-                                  ),
+                                  ],
                                 ),
-                              Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    8.0, 8.0, 0.0, 0.0),
-                                child: Text(
-                                  _model.selectedCategory ==
-                                          UserDiseaseChoice.Crop
-                                      ? 'Disease Crop'
-                                      : 'Disease Animal',
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: 'Readex Pro',
-                                        fontSize: 16.0,
-                                        letterSpacing: 0.0,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                ),
-                              ),
-                              if (_model.selectedCrop != 100)
                                 Padding(
                                   padding: const EdgeInsetsDirectional.fromSTEB(
-                                      8.0, 8.0, 0.0, 0.0),
-                                  child: wrapWithModel(
-                                    model: _model.diseaseItemSelectModel2,
-                                    updateCallback: () => setState(() {}),
-                                    child: DiseaseItemSelectWidget(
-                                      index: 0,
-                                      selectedIndex: 1,
-                                      image: getJsonField(
-                                        _model.categoryItemList[
-                                            _model.selectedCrop],
-                                        r'''$.img''',
-                                      ).toString(),
-                                      title: getJsonField(
-                                        _model.categoryItemList[
-                                            _model.selectedCrop],
-                                        r'''$.name''',
-                                      ).toString(),
-                                    ),
-                                  ),
-                                ),
-                              Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    8.0, 16.0, 0.0, 0.0),
-                                child: Text(
-                                  FFLocalizations.of(context).getText(
-                                    'dc5f3afd' /* Ask your Question/Problem */,
-                                  ),
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: 'Readex Pro',
-                                        fontSize: 16.0,
-                                        letterSpacing: 0.0,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    8.0, 8.0, 8.0, 0.0),
-                                child: Container(
-                                  width: MediaQuery.sizeOf(context).width * 1.0,
-                                  decoration: BoxDecoration(
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryBackground,
-                                    borderRadius: BorderRadius.circular(8.0),
-                                    border: Border.all(
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryText,
-                                      width: 2.0,
-                                    ),
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: TextFormField(
-                                      controller: _model.textController2,
-                                      focusNode: _model.textFieldFocusNode2,
-                                      onChanged: (_) => EasyDebounce.debounce(
-                                        '_model.textController2',
-                                        const Duration(milliseconds: 100),
-                                        () async {
-                                          setState(() {});
-                                        },
-                                      ),
-                                      autofocus: true,
-                                      obscureText: false,
-                                      decoration: InputDecoration(
-                                        hintText:
-                                            FFLocalizations.of(context).getText(
-                                          'pukwwi83' /* write your disease symptoms */,
+                                      0.0, 30.0, 0.0, 0.0),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                            8.0, 8.0, 0.0, 0.0),
+                                        child: Text(
+                                          _model.selectedCategory ==
+                                                  UserDiseaseChoice.Crop
+                                              ? 'Disease Crop'
+                                              : 'Disease Animal',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily: 'Readex Pro',
+                                                fontSize: 18.0,
+                                                letterSpacing: 0.0,
+                                                fontWeight: FontWeight.bold,
+                                              ),
                                         ),
-                                        hintStyle: FlutterFlowTheme.of(context)
-                                            .labelMedium
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                if (_model.selectedCrop != 100)
+                                  Padding(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        8.0, 8.0, 0.0, 0.0),
+                                    child: wrapWithModel(
+                                      model: _model.diseaseItemSelectModel2,
+                                      updateCallback: () => setState(() {}),
+                                      child: DiseaseItemSelectWidget(
+                                        index: 0,
+                                        selectedIndex: 1,
+                                        image: getJsonField(
+                                          _model.categoryItemList[
+                                              _model.selectedCrop],
+                                          r'''$.img''',
+                                        ).toString(),
+                                        title: getJsonField(
+                                          _model.categoryItemList[
+                                              _model.selectedCrop],
+                                          r'''$.name''',
+                                        ).toString(),
+                                      ),
+                                    ),
+                                  ),
+                                Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      8.0, 30.0, 0.0, 0.0),
+                                  child: Text(
+                                    FFLocalizations.of(context).getText(
+                                      'dc5f3afd' /* Ask your Question/Problem */,
+                                    ),
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Readex Pro',
+                                          fontSize: 18.0,
+                                          letterSpacing: 0.0,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      8.0, 8.0, 8.0, 0.0),
+                                  child: Container(
+                                    width:
+                                        MediaQuery.sizeOf(context).width * 1.0,
+                                    decoration: BoxDecoration(
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryBackground,
+                                      borderRadius: BorderRadius.circular(8.0),
+                                      border: Border.all(
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryText,
+                                        width: 2.0,
+                                      ),
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: TextFormField(
+                                        controller: _model.textController2,
+                                        focusNode: _model.textFieldFocusNode2,
+                                        onChanged: (_) => EasyDebounce.debounce(
+                                          '_model.textController2',
+                                          const Duration(milliseconds: 100),
+                                          () async {
+                                            setState(() {});
+                                          },
+                                        ),
+                                        autofocus: true,
+                                        obscureText: false,
+                                        decoration: InputDecoration(
+                                          hintText: FFLocalizations.of(context)
+                                              .getText(
+                                            'pukwwi83' /* write your disease symptoms */,
+                                          ),
+                                          hintStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .labelMedium
+                                                  .override(
+                                                    fontFamily: 'Readex Pro',
+                                                    letterSpacing: 0.0,
+                                                  ),
+                                          enabledBorder: InputBorder.none,
+                                          focusedBorder: InputBorder.none,
+                                          errorBorder: InputBorder.none,
+                                          focusedErrorBorder: InputBorder.none,
+                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
                                             .override(
                                               fontFamily: 'Readex Pro',
                                               letterSpacing: 0.0,
                                             ),
-                                        enabledBorder: InputBorder.none,
-                                        focusedBorder: InputBorder.none,
-                                        errorBorder: InputBorder.none,
-                                        focusedErrorBorder: InputBorder.none,
+                                        textAlign: TextAlign.start,
+                                        maxLines: 4,
+                                        minLines: 4,
+                                        validator: _model
+                                            .textController2Validator
+                                            .asValidator(context),
                                       ),
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            fontFamily: 'Readex Pro',
-                                            letterSpacing: 0.0,
-                                          ),
-                                      textAlign: TextAlign.start,
-                                      maxLines: 4,
-                                      minLines: 4,
-                                      validator: _model.textController2Validator
-                                          .asValidator(context),
                                     ),
                                   ),
                                 ),
-                              ),
-                              if (functions
-                                      .getLengthFromString(
-                                          _model.textController2.text)
-                                      .toString() !=
-                                  '0')
-                                Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      8.0, 16.0, 8.0, 0.0),
-                                  child: FFButtonWidget(
-                                    onPressed: () async {
-                                      setState(() {
-                                        _model.showLastStepAnimation = true;
-                                      });
-                                      await _model.pageViewController?.nextPage(
-                                        duration: const Duration(milliseconds: 300),
-                                        curve: Curves.ease,
-                                      );
-                                      await geminiTextFromImage(
-                                        context,
-                                        '${_model.textController2.text} ? Please provide me answer in below format  1. we need answer in 3 sections  first section will contain  \"Disease Name :\" <actual disease name > second section will contain \"Symptoms :\" <4 bullet points for symptoms > and third section will contain \"Diagnosis :\"\" <4 bullet points for diagnosis>  2. I want 2 lines of gap between all the 3 sections.   3. can you bold the headings of the each section .',
-                                        uploadImageBytes:
-                                            _model.uploadedImageByUser,
-                                      ).then((generatedText) {
-                                        safeSetState(() =>
-                                            _model.genAIOutput = generatedText);
-                                      });
+                                if (functions
+                                        .getLengthFromString(
+                                            _model.textController2.text)
+                                        .toString() !=
+                                    '0')
+                                  Padding(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        8.0, 16.0, 8.0, 0.0),
+                                    child: FFButtonWidget(
+                                      onPressed: () async {
+                                        setState(() {
+                                          _model.showLastStepAnimation = true;
+                                        });
+                                        await _model.pageViewController
+                                            ?.nextPage(
+                                          duration: const Duration(milliseconds: 300),
+                                          curve: Curves.ease,
+                                        );
+                                        await geminiTextFromImage(
+                                          context,
+                                          '${_model.textController2.text}? Please provide me answer in below format .1. we need answer in 3 sections  first section will contain  \"Disease Name :\" <actual disease name > second section will contain \"Symptoms :\" <4 bullet points for symptoms > and third section will contain \"Diagnosis :\"\" <4 bullet points for diagnosis>   2. I want 2 lines of gap between all the 3 sections.  3. can you bold the headings of the each section .  4. please provide all text in size 18.  ',
+                                          uploadImageBytes:
+                                              _model.uploadedImageByUser,
+                                        ).then((generatedText) {
+                                          safeSetState(() => _model
+                                              .genAIOutput = generatedText);
+                                        });
 
-                                      await geminiGenerateText(
-                                        context,
-                                        '${_model.genAIOutput}what is disease name in 2-5 words?',
-                                      ).then((generatedText) {
-                                        safeSetState(() => _model
-                                            .aiTitleOutput = generatedText);
-                                      });
+                                        await geminiGenerateText(
+                                          context,
+                                          '${_model.genAIOutput}what is disease name in 2-5 words?',
+                                        ).then((generatedText) {
+                                          safeSetState(() => _model
+                                              .aiTitleOutput = generatedText);
+                                        });
 
-                                      await Future.delayed(
-                                          const Duration(milliseconds: 1000));
-                                      setState(() {
-                                        _model.showLastStepAnimation = false;
-                                      });
+                                        await Future.delayed(
+                                            const Duration(milliseconds: 1000));
+                                        setState(() {
+                                          _model.showLastStepAnimation = false;
+                                        });
 
-                                      setState(() {});
-                                    },
-                                    text: FFLocalizations.of(context).getText(
-                                      'irwgl5oi' /* Next */,
-                                    ),
-                                    options: FFButtonOptions(
-                                      width: MediaQuery.sizeOf(context).width *
-                                          1.0,
-                                      height: 50.0,
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
-                                          24.0, 0.0, 24.0, 0.0),
-                                      iconPadding:
-                                          const EdgeInsetsDirectional.fromSTEB(
-                                              0.0, 0.0, 0.0, 0.0),
-                                      color:
-                                          FlutterFlowTheme.of(context).primary,
-                                      textStyle: FlutterFlowTheme.of(context)
-                                          .titleSmall
-                                          .override(
-                                            fontFamily: 'Readex Pro',
-                                            color: Colors.white,
-                                            letterSpacing: 0.0,
-                                          ),
-                                      elevation: 3.0,
-                                      borderSide: const BorderSide(
-                                        color: Colors.transparent,
-                                        width: 1.0,
+                                        setState(() {});
+                                      },
+                                      text: FFLocalizations.of(context).getText(
+                                        'irwgl5oi' /* Next */,
                                       ),
-                                      borderRadius: BorderRadius.circular(8.0),
+                                      options: FFButtonOptions(
+                                        width:
+                                            MediaQuery.sizeOf(context).width *
+                                                1.0,
+                                        height: 50.0,
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                            24.0, 0.0, 24.0, 0.0),
+                                        iconPadding:
+                                            const EdgeInsetsDirectional.fromSTEB(
+                                                0.0, 0.0, 0.0, 0.0),
+                                        color: FlutterFlowTheme.of(context)
+                                            .primary,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .titleSmall
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              color: Colors.white,
+                                              letterSpacing: 0.0,
+                                            ),
+                                        elevation: 3.0,
+                                        borderSide: const BorderSide(
+                                          color: Colors.transparent,
+                                          width: 1.0,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
+                                      ),
                                     ),
                                   ),
-                                ),
-                            ],
+                              ],
+                            ),
                           ),
                           Padding(
                             padding: const EdgeInsetsDirectional.fromSTEB(
@@ -1360,23 +1389,6 @@ class _DiseaseDetectionWidgetState extends State<DiseaseDetectionWidget> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  if (_model.aiTitleOutput != null &&
-                                      _model.aiTitleOutput != '')
-                                    Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 0.0, 0.0, 16.0),
-                                      child: Text(
-                                        _model.aiTitleOutput!,
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              fontFamily: 'Readex Pro',
-                                              fontSize: 16.0,
-                                              letterSpacing: 0.0,
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                      ),
-                                    ),
                                   if (_model.showLastStepAnimation)
                                     Padding(
                                       padding: const EdgeInsetsDirectional.fromSTEB(
@@ -1386,14 +1398,19 @@ class _DiseaseDetectionWidgetState extends State<DiseaseDetectionWidget> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
-                                          Lottie.asset(
-                                            'assets/lottie_animations/Animation_-_1714209062580_(1).json',
-                                            width: MediaQuery.sizeOf(context)
-                                                    .width *
-                                                1.0,
-                                            height: 150.0,
-                                            fit: BoxFit.cover,
-                                            animate: true,
+                                          Padding(
+                                            padding:
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 50.0, 0.0, 0.0),
+                                            child: Lottie.asset(
+                                              'assets/lottie_animations/Animation_-_1714209062580_(1).json',
+                                              width: MediaQuery.sizeOf(context)
+                                                      .width *
+                                                  1.0,
+                                              height: 150.0,
+                                              fit: BoxFit.cover,
+                                              animate: true,
+                                            ),
                                           ),
                                         ],
                                       ),

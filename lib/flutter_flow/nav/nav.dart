@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '/backend/backend.dart';
-import '/backend/schema/structs/index.dart';
 
 import '/auth/base_auth_user_provider.dart';
 
@@ -184,10 +183,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'GeneratedVideoPage',
           path: '/generatedVideoPage',
+          asyncParams: {
+            'videoDoc': getDoc(['videos'], VideosRecord.fromSnapshot),
+          },
           builder: (context, params) => GeneratedVideoPageWidget(
-            videoUrls: params.getParam(
-              'videoUrls',
-              ParamType.String,
+            videoDoc: params.getParam(
+              'videoDoc',
+              ParamType.Document,
             ),
           ),
         ),
@@ -195,6 +197,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'Demo',
           path: '/demo',
           builder: (context, params) => const DemoWidget(),
+        ),
+        FFRoute(
+          name: 'DontDeleteThisPage',
+          path: '/dontDeleteThisPage',
+          builder: (context, params) => const DontDeleteThisPageWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
       observers: [routeObserver],
@@ -382,11 +389,15 @@ class FFRoute {
                 )
               : builder(context, ffParams);
           final child = appStateNotifier.loading
-              ? Container(
-                  color: FlutterFlowTheme.of(context).appBG,
-                  child: Image.asset(
-                    'assets/images/Screenshot_2024-04-28_103050.png',
-                    fit: BoxFit.contain,
+              ? Center(
+                  child: SizedBox(
+                    width: 50.0,
+                    height: 50.0,
+                    child: CircularProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                        FlutterFlowTheme.of(context).primary,
+                      ),
+                    ),
                   ),
                 )
               : page;

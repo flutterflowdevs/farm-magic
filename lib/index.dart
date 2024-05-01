@@ -30,3 +30,5 @@ export '/video_prompt_page/video_prompt_page_widget.dart'
 export '/generated_video_page/generated_video_page_widget.dart'
     show GeneratedVideoPageWidget;
 export '/demo/demo_widget.dart' show DemoWidget;
+export '/dont_delete_this_page/dont_delete_this_page_widget.dart'
+    show DontDeleteThisPageWidget;

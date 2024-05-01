@@ -20,7 +20,8 @@
 	<array>
 		<string>en</string>
 		<string>hi</string>
-		<string>ta</string>
+		<string>pt</string>
+		<string>sw</string>
 	</array>
 
 	<key>CFBundleShortVersionString</key>

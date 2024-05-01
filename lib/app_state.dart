@@ -82,12 +82,14 @@ class FFAppState extends ChangeNotifier {
   }
 
   List<LanguageStruct> _LanguageList = [
-    LanguageStruct.fromSerializableMap(
-        jsonDecode('{\"lang_name\":\"English\",\"lang_code\":\"en\"}')),
-    LanguageStruct.fromSerializableMap(
-        jsonDecode('{\"lang_name\":\"Hindi\",\"lang_code\":\"hi\"}')),
-    LanguageStruct.fromSerializableMap(
-        jsonDecode('{\"lang_name\":\"Tamil\",\"lang_code\":\"ta\"}'))
+    LanguageStruct.fromSerializableMap(jsonDecode(
+        '{\"lang_name\":\"English\",\"lang_code\":\"en\",\"image\":\"https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/farmers-help-rb0ek4/assets/lz7w1luuuw5f/United-kingdom_flag_icon_round.svg.png\"}')),
+    LanguageStruct.fromSerializableMap(jsonDecode(
+        '{\"lang_name\":\"हिंदी\",\"lang_code\":\"hi\",\"image\":\"https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/farmers-help-rb0ek4/assets/haasya3shprf/india-flag-round-shape-png.webp\"}')),
+    LanguageStruct.fromSerializableMap(jsonDecode(
+        '{\"lang_name\":\"Portuguese\",\"lang_code\":\"pt\",\"image\":\"https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/farmers-help-rb0ek4/assets/cs8y1j202cet/portugal-flag-logo-circle-thumbnail-removebg-preview.png\"}')),
+    LanguageStruct.fromSerializableMap(jsonDecode(
+        '{\"lang_name\":\"Swahili\",\"lang_code\":\"sw\",\"image\":\"https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/farmers-help-rb0ek4/assets/wpvkzwsapuu7/-kenya-national-flag-flag-miscellaneous--removebg-preview.png\"}'))
   ];
   List<LanguageStruct> get LanguageList => _LanguageList;
   set LanguageList(List<LanguageStruct> value) {

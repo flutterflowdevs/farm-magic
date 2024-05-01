@@ -1,3 +1,5 @@
+import '/auth/firebase_auth/auth_util.dart';
+import '/backend/backend.dart';
 import '/backend/gemini/gemini.dart';
 import '/components/prompt_to_video_loader_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -510,9 +512,18 @@ class _VideoPromptPageWidgetState extends State<VideoPromptPageWidget> {
                                                 });
                                               }
                                             }),
+                                            Future(() async {
+                                              await _model
+                                                  .audioGenerationAction(
+                                                      context);
+                                              setState(() {});
+                                              setState(() {
+                                                _model.hits = _model.hits + 1;
+                                              });
+                                            }),
                                           ]);
                                           if (_model.hits ==
-                                              _model.parallalApiCount) {
+                                              (_model.parallalApiCount + 1)) {
                                             setState(() {
                                               _model.addToImageURLList('END');
                                             });
@@ -523,7 +534,7 @@ class _VideoPromptPageWidgetState extends State<VideoPromptPageWidget> {
                                               _model.finalStaticVideoLiveAudio =
                                                   await actions.addVideos(
                                                 _model.videoPath.toList(),
-                                                _model.audioFile!,
+                                                _model.audioFile,
                                               );
                                               shouldSetState = true;
                                               setState(() {
@@ -532,15 +543,54 @@ class _VideoPromptPageWidgetState extends State<VideoPromptPageWidget> {
                                                     false;
                                               });
 
+                                              var videosRecordReference1 =
+                                                  VideosRecord.collection.doc();
+                                              await videosRecordReference1
+                                                  .set(createVideosRecordData(
+                                                userRef: currentUserReference,
+                                                prompt:
+                                                    _model.textController.text,
+                                                videoUrl: _model
+                                                    .finalStaticVideoLiveAudio,
+                                                videoDescription:
+                                                    _model.videoDescription,
+                                                timeStamp: getCurrentTimestamp,
+                                                isPublic: false,
+                                              ));
+                                              _model.videoDocStaticLive =
+                                                  VideosRecord.getDocumentFromData(
+                                                      createVideosRecordData(
+                                                        userRef:
+                                                            currentUserReference,
+                                                        prompt: _model
+                                                            .textController
+                                                            .text,
+                                                        videoUrl: _model
+                                                            .finalStaticVideoLiveAudio,
+                                                        videoDescription: _model
+                                                            .videoDescription,
+                                                        timeStamp:
+                                                            getCurrentTimestamp,
+                                                        isPublic: false,
+                                                      ),
+                                                      videosRecordReference1);
+                                              shouldSetState = true;
+                                              setState(() {
+                                                _model.textController?.clear();
+                                              });
+
                                               context.pushNamed(
                                                 'GeneratedVideoPage',
                                                 queryParameters: {
-                                                  'videoUrls': serializeParam(
-                                                    _model
-                                                        .finalStaticVideoLiveAudio,
-                                                    ParamType.String,
+                                                  'videoDoc': serializeParam(
+                                                    _model.videoDocStaticLive,
+                                                    ParamType.Document,
                                                   ),
                                                 }.withoutNulls,
+                                                extra: <String, dynamic>{
+                                                  'videoDoc':
+                                                      _model.videoDocStaticLive,
+                                                },
                                               );
 
                                               if (shouldSetState) {
@@ -551,7 +601,7 @@ class _VideoPromptPageWidgetState extends State<VideoPromptPageWidget> {
                                               _model.finalStaticVideo =
                                                   await actions.addVideos(
                                                 _model.videoPath.toList(),
-                                                'ssome tankdlfaklsdhflk',
+                                                null,
                                               );
                                               shouldSetState = true;
                                               setState(() {
@@ -560,14 +610,54 @@ class _VideoPromptPageWidgetState extends State<VideoPromptPageWidget> {
                                                     false;
                                               });
 
+                                              var videosRecordReference2 =
+                                                  VideosRecord.collection.doc();
+                                              await videosRecordReference2
+                                                  .set(createVideosRecordData(
+                                                userRef: currentUserReference,
+                                                prompt:
+                                                    _model.textController.text,
+                                                videoUrl:
+                                                    _model.finalStaticVideo,
+                                                videoDescription:
+                                                    _model.videoDescription,
+                                                timeStamp: getCurrentTimestamp,
+                                                isPublic: false,
+                                              ));
+                                              _model.videoDocStatic = VideosRecord
+                                                  .getDocumentFromData(
+                                                      createVideosRecordData(
+                                                        userRef:
+                                                            currentUserReference,
+                                                        prompt: _model
+                                                            .textController
+                                                            .text,
+                                                        videoUrl: _model
+                                                            .finalStaticVideo,
+                                                        videoDescription: _model
+                                                            .videoDescription,
+                                                        timeStamp:
+                                                            getCurrentTimestamp,
+                                                        isPublic: false,
+                                                      ),
+                                                      videosRecordReference2);
+                                              shouldSetState = true;
+                                              setState(() {
+                                                _model.textController?.clear();
+                                              });
+
                                               context.pushNamed(
                                                 'GeneratedVideoPage',
                                                 queryParameters: {
-                                                  'videoUrls': serializeParam(
-                                                    _model.finalStaticVideo,
-                                                    ParamType.String,
+                                                  'videoDoc': serializeParam(
+                                                    _model.videoDocStatic,
+                                                    ParamType.Document,
                                                   ),
                                                 }.withoutNulls,
+                                                extra: <String, dynamic>{
+                                                  'videoDoc':
+                                                      _model.videoDocStatic,
+                                                },
                                               );
 
                                               if (shouldSetState) {
@@ -758,9 +848,18 @@ class _VideoPromptPageWidgetState extends State<VideoPromptPageWidget> {
                                                   });
                                                 }
                                               }),
+                                              Future(() async {
+                                                await _model
+                                                    .audioGenerationAction(
+                                                        context);
+                                                setState(() {});
+                                                setState(() {
+                                                  _model.hits = _model.hits + 1;
+                                                });
+                                              }),
                                             ]);
                                             if (_model.hits ==
-                                                _model.parallalApiCount) {
+                                                (_model.parallalApiCount + 1)) {
                                               setState(() {
                                                 _model.addToImageURLList('END');
                                               });
@@ -771,7 +870,7 @@ class _VideoPromptPageWidgetState extends State<VideoPromptPageWidget> {
                                                 _model.finalVideoLiveAudio =
                                                     await actions.addVideos(
                                                   _model.videoPath.toList(),
-                                                  _model.audioFile!,
+                                                  _model.audioFile,
                                                 );
                                                 shouldSetState = true;
                                                 setState(() {
@@ -780,15 +879,57 @@ class _VideoPromptPageWidgetState extends State<VideoPromptPageWidget> {
                                                   _model.isLoading = false;
                                                 });
 
+                                                var videosRecordReference3 =
+                                                    VideosRecord.collection
+                                                        .doc();
+                                                await videosRecordReference3
+                                                    .set(createVideosRecordData(
+                                                  userRef: currentUserReference,
+                                                  prompt: _model
+                                                      .textController.text,
+                                                  videoUrl: _model
+                                                      .finalVideoLiveAudio,
+                                                  videoDescription:
+                                                      _model.videoDescription,
+                                                  timeStamp:
+                                                      getCurrentTimestamp,
+                                                  isPublic: false,
+                                                ));
+                                                _model.videoDocLive = VideosRecord
+                                                    .getDocumentFromData(
+                                                        createVideosRecordData(
+                                                          userRef:
+                                                              currentUserReference,
+                                                          prompt: _model
+                                                              .textController
+                                                              .text,
+                                                          videoUrl: _model
+                                                              .finalVideoLiveAudio,
+                                                          videoDescription: _model
+                                                              .videoDescription,
+                                                          timeStamp:
+                                                              getCurrentTimestamp,
+                                                          isPublic: false,
+                                                        ),
+                                                        videosRecordReference3);
+                                                shouldSetState = true;
+                                                setState(() {
+                                                  _model.textController
+                                                      ?.clear();
+                                                });
+
                                                 context.pushNamed(
                                                   'GeneratedVideoPage',
                                                   queryParameters: {
-                                                    'videoUrls': serializeParam(
-                                                      _model
-                                                          .finalVideoLiveAudio,
-                                                      ParamType.String,
+                                                    'videoDoc': serializeParam(
+                                                      _model.videoDocLive,
+                                                      ParamType.Document,
                                                     ),
                                                   }.withoutNulls,
+                                                  extra: <String, dynamic>{
+                                                    'videoDoc':
+                                                        _model.videoDocLive,
+                                                  },
                                                 );
 
                                                 if (shouldSetState) {
@@ -799,7 +940,7 @@ class _VideoPromptPageWidgetState extends State<VideoPromptPageWidget> {
                                                 _model.finalVideo =
                                                     await actions.addVideos(
                                                   _model.videoPath.toList(),
-                                                  'wrandomeStrinandla',
+                                                  null,
                                                 );
                                                 shouldSetState = true;
                                                 setState(() {
@@ -808,14 +949,55 @@ class _VideoPromptPageWidgetState extends State<VideoPromptPageWidget> {
                                                   _model.isLoading = false;
                                                 });
 
+                                                var videosRecordReference4 =
+                                                    VideosRecord.collection
+                                                        .doc();
+                                                await videosRecordReference4
+                                                    .set(createVideosRecordData(
+                                                  userRef: currentUserReference,
+                                                  prompt: _model
+                                                      .textController.text,
+                                                  videoUrl: _model.finalVideo,
+                                                  videoDescription:
+                                                      _model.videoDescription,
+                                                  timeStamp:
+                                                      getCurrentTimestamp,
+                                                  isPublic: false,
+                                                ));
+                                                _model.videoDoc = VideosRecord
+                                                    .getDocumentFromData(
+                                                        createVideosRecordData(
+                                                          userRef:
+                                                              currentUserReference,
+                                                          prompt: _model
+                                                              .textController
+                                                              .text,
+                                                          videoUrl:
+                                                              _model.finalVideo,
+                                                          videoDescription: _model
+                                                              .videoDescription,
+                                                          timeStamp:
+                                                              getCurrentTimestamp,
+                                                          isPublic: false,
+                                                        ),
+                                                        videosRecordReference4);
+                                                shouldSetState = true;
+                                                setState(() {
+                                                  _model.textController
+                                                      ?.clear();
+                                                });
+
                                                 context.pushNamed(
                                                   'GeneratedVideoPage',
                                                   queryParameters: {
-                                                    'videoUrls': serializeParam(
-                                                      _model.finalVideo,
-                                                      ParamType.String,
+                                                    'videoDoc': serializeParam(
+                                                      _model.videoDoc,
+                                                      ParamType.Document,
                                                     ),
                                                   }.withoutNulls,
+                                                  extra: <String, dynamic>{
+                                                    'videoDoc': _model.videoDoc,
+                                                  },
                                                 );
 
                                                 if (shouldSetState) {

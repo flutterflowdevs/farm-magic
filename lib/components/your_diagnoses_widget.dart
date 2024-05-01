@@ -41,10 +41,12 @@ class _YourDiagnosesWidgetState extends State<YourDiagnosesWidget> {
   Widget build(BuildContext context) {
     return StreamBuilder<List<DiagnosesRecord>>(
       stream: queryDiagnosesRecord(
-        queryBuilder: (diagnosesRecord) => diagnosesRecord.where(
-          'user_ref',
-          isEqualTo: currentUserReference,
-        ),
+        queryBuilder: (diagnosesRecord) => diagnosesRecord
+            .where(
+              'user_ref',
+              isEqualTo: currentUserReference,
+            )
+            .orderBy('created_time', descending: true),
         limit: 2,
       ),
       builder: (context, snapshot) {

@@ -82,13 +82,13 @@ Future<File> downloadVideosToTempDirectory(List<String> videoUrls) async {
 
 Future<String> addVideos(
   List<String> motionUrls,
-  String audioUrl,
+  String? audioUrlParam,
 ) async {
   // Add your function code here!
 
   List<String> videoUrls = motionUrls;
 
-  String audioUrl =
+  String audioUrl = audioUrlParam ??
       "https://storage.googleapis.com/buildship-3k9suj-europe-west4/undefined/LcfcDJNUP1GQjkzn1xUU_1713180911226.mp3";
 
   await clearTempDirectory();

@@ -330,12 +330,31 @@ class _CategoriesContainer1WidgetState
                                         Text(
                                           () {
                                             if (_model.selectedCat == 0) {
-                                              return 'Identify Disease';
+                                              return FFLocalizations.of(context)
+                                                  .getVariableText(
+                                                enText: 'Identify Disease',
+                                                hiText: 'रोग की पहचान करें',
+                                                ptText: 'Identificar doenças',
+                                                swText: 'Tambua Ugonjwa',
+                                              );
                                             } else if (_model.selectedCat ==
                                                 1) {
-                                              return 'Farming Tutorial';
+                                              return FFLocalizations.of(context)
+                                                  .getVariableText(
+                                                enText: 'Farming Tutorial',
+                                                hiText: 'खेती ट्यूटोरियल',
+                                                ptText:
+                                                    'Tutorial de agricultura',
+                                                swText: 'Mafunzo ya Kilimo',
+                                              );
                                             } else {
-                                              return 'Virtual Assistant';
+                                              return FFLocalizations.of(context)
+                                                  .getVariableText(
+                                                enText: 'Virtual Assistant',
+                                                hiText: 'आभासी सहायक',
+                                                ptText: 'Assistente virtual',
+                                                swText: 'Mratibu wa Mtandao',
+                                              );
                                             }
                                           }(),
                                           style: FlutterFlowTheme.of(context)
