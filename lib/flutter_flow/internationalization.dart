@@ -572,6 +572,12 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'pt': 'termos e Condições',
       'sw': 'Sheria na Masharti',
     },
+    'oz12gd0g': {
+      'en': 'Farm Tutorial History',
+      'hi': '',
+      'pt': '',
+      'sw': '',
+    },
     'tfgv3cwt': {
       'en': 'Log out',
       'hi': 'लॉग आउट',
@@ -1421,12 +1427,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'pt': 'Página de prompt de vídeo',
       'sw': 'Ukurasa wa haraka wa Video',
     },
-    '9s810xqk': {
-      'en': 'Static',
-      'hi': 'स्थिर',
-      'pt': 'Estático',
-      'sw': 'Tuli',
-    },
     '5p1hxm0o': {
       'en': 'Prompt One, Hello flutterflow deverlopers',
       'hi': 'संकेत एक, नमस्कार फ़्लटरफ़्लो डेवलपर्स',
@@ -1519,6 +1519,173 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'hi': 'घर',
       'pt': 'Lar',
       'sw': 'Nyumbani',
+    },
+  },
+  // FarmTutorialHistoryList
+  {
+    'jy70wcvz': {
+      'en': 'Video Tutorial History',
+      'hi': '',
+      'pt': '',
+      'sw': '',
+    },
+    '77dnbwcs': {
+      'en': 'Home',
+      'hi': '',
+      'pt': '',
+      'sw': '',
+    },
+  },
+  // TermsAndConditionsCopy
+  {
+    '695seqab': {
+      'en': 'Terms And Conditions',
+      'hi': '',
+      'pt': '',
+      'sw': '',
+    },
+    '2lkdl0i4': {
+      'en':
+          'Welcome to Farmers-Help! These Terms and Conditions (\"Terms\") govern your use of our mobile app and services provided therein (\"App\"). By accessing or using the App, you agree to be bound by these Terms.',
+      'hi': '',
+      'pt': '',
+      'sw': '',
+    },
+    '4nbmukjx': {
+      'en': '1. Acceptance of Terms',
+      'hi': '',
+      'pt': '',
+      'sw': '',
+    },
+    'wwv959rr': {
+      'en':
+          'By accessing or using the App, you agree to comply with these Terms. If you do not agree with any part of these Terms, you may not use the App.',
+      'hi': '',
+      'pt': '',
+      'sw': '',
+    },
+    '42fti3xw': {
+      'en': '2. Services',
+      'hi': '',
+      'pt': '',
+      'sw': '',
+    },
+    '1ktsuzgd': {
+      'en':
+          'Our App provides various services aimed at assisting farmers in growing their plants and crops more effectively. These services include but are not limited to:\n\na) Providing agricultural advice and recommendations based on data analysis and AI technology.\n\nb) Offering tools and resources for plant care, pest management, and crop optimization.\n\nc) Facilitating communication and collaboration among farmers and agricultural experts.\n\nd) Providing access to educational content, tutorials, and training materials related to farming practices.',
+      'hi': '',
+      'pt': '',
+      'sw': '',
+    },
+    '6drlf9m9': {
+      'en': '3. User Conduct',
+      'hi': '',
+      'pt': '',
+      'sw': '',
+    },
+    'uhar880i': {
+      'en':
+          'You agree to use the App in compliance with all applicable laws, regulations, and these Terms. You shall not:\n\na) Use the App for any unlawful or unauthorized purpose.\n\n b) Interfere with or disrupt the operation of the App or any servers or networks connected to the App.\n\nc)  Transmit any viruses, malware, or harmful code through the App.\n\nd)  Impersonate any person or entity, or falsely state or misrepresent your affiliation with any person or entity.',
+      'hi': '',
+      'pt': '',
+      'sw': '',
+    },
+    'tch87i92': {
+      'en': '4. Privacy Policy',
+      'hi': '',
+      'pt': '',
+      'sw': '',
+    },
+    'pgc7o1eb': {
+      'en':
+          'Your privacy is important to us. Please review our Privacy Policy to understand how we collect, use, and disclose your personal information when you use our App.',
+      'hi': '',
+      'pt': '',
+      'sw': '',
+    },
+    'gn8am87e': {
+      'en': '5. Intellectual Property',
+      'hi': '',
+      'pt': '',
+      'sw': '',
+    },
+    '105ikem4': {
+      'en':
+          'All content, trademarks, logos, and intellectual property rights displayed on the App are owned by us or our licensors. You may not use, reproduce, or distribute any content from the App without our prior written consent.',
+      'hi': '',
+      'pt': '',
+      'sw': '',
+    },
+    'e69dnmo6': {
+      'en': '6. Disclaimer of Warranties',
+      'hi': '',
+      'pt': '',
+      'sw': '',
+    },
+    'n4y1jv5f': {
+      'en':
+          'The App and its services are provided on an \"as-is\" and \"as-available\" basis, without warranties of any kind, either express or implied. We do not guarantee the accuracy, reliability, or completeness of any information provided through the App.',
+      'hi': '',
+      'pt': '',
+      'sw': '',
+    },
+    'j6ue49rr': {
+      'en': '7. Limitation of Liability',
+      'hi': '',
+      'pt': '',
+      'sw': '',
+    },
+    'a8l57wbq': {
+      'en':
+          'In no event shall we be liable for any indirect, incidental, special, or consequential damages arising out of or in connection with your use of the App or its services, even if we have been advised of the possibility of such damages.',
+      'hi': '',
+      'pt': '',
+      'sw': '',
+    },
+    '6tywl477': {
+      'en': '8. Governing Law',
+      'hi': '',
+      'pt': '',
+      'sw': '',
+    },
+    'mdmxmyy9': {
+      'en':
+          'These Terms shall be governed by and construed in accordance with the laws, without regard to its conflict of law provisions.',
+      'hi': '',
+      'pt': '',
+      'sw': '',
+    },
+    'a6nvkd72': {
+      'en': '9. Changes to Terms',
+      'hi': '',
+      'pt': '',
+      'sw': '',
+    },
+    '0zp69zb8': {
+      'en':
+          'We reserve the right to modify or update these Terms at any time. Your continued use of the App after any changes indicates your acceptance of the modified Terms.',
+      'hi': '',
+      'pt': '',
+      'sw': '',
+    },
+    'y5rwwqjc': {
+      'en': '10. Contact Us',
+      'hi': '',
+      'pt': '',
+      'sw': '',
+    },
+    'qmdf1qk8': {
+      'en':
+          'If you have any questions or concerns about these Terms, please contact us at info@flutterflowdevs.com.',
+      'hi': '',
+      'pt': '',
+      'sw': '',
+    },
+    '6spmpqrf': {
+      'en': 'Home',
+      'hi': '',
+      'pt': '',
+      'sw': '',
     },
   },
   // Categories_Container

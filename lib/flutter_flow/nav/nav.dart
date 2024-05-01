@@ -202,6 +202,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'DontDeleteThisPage',
           path: '/dontDeleteThisPage',
           builder: (context, params) => const DontDeleteThisPageWidget(),
+        ),
+        FFRoute(
+          name: 'FarmTutorialHistoryList',
+          path: '/farmTutorialHistoryList',
+          builder: (context, params) => const FarmTutorialHistoryListWidget(),
+        ),
+        FFRoute(
+          name: 'TermsAndConditionsCopy',
+          path: '/termsAndConditionsCopy',
+          builder: (context, params) => const TermsAndConditionsCopyWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
       observers: [routeObserver],

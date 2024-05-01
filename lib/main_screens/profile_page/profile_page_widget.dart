@@ -250,6 +250,28 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                           updateCallback: () => setState(() {}),
                           child: ProfileOptionsWidget(
                             optionTitle: FFLocalizations.of(context).getText(
+                              'oz12gd0g' /* Farm Tutorial History */,
+                            ),
+                            icon: Icon(
+                              Icons.history_edu,
+                              color: FlutterFlowTheme.of(context).error,
+                              size: 25.0,
+                            ),
+                            isLogout: true,
+                            action: () async {
+                              context.goNamed('FarmTutorialHistoryList');
+                            },
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                            10.0, 0.0, 10.0, 0.0),
+                        child: wrapWithModel(
+                          model: _model.profileOptionsModel6,
+                          updateCallback: () => setState(() {}),
+                          child: ProfileOptionsWidget(
+                            optionTitle: FFLocalizations.of(context).getText(
                               'tfgv3cwt' /* Log out */,
                             ),
                             icon: Icon(

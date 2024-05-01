@@ -1,7 +1,6 @@
 import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
 import '/backend/gemini/gemini.dart';
-import '/components/prompt_to_video_loader_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
@@ -92,27 +91,15 @@ class VideoPromptPageModel extends FlutterFlowModel<VideoPromptPageWidget> {
 
   String? videoDescription = 'static default value';
 
+  bool buttonActive = false;
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
-  // State field(s) for Checkbox widget.
-  bool? checkboxValue;
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode;
   TextEditingController? textController;
   String? Function(BuildContext, String?)? textControllerValidator;
-  // Stores action output result for [Action Block - GenerateImageFromGenId] action in Button widget.
-  dynamic dimageJson1;
-  // Stores action output result for [Action Block - GenerateImageFromGenId] action in Button widget.
-  dynamic dimageJson2;
-  // Stores action output result for [Custom Action - addVideos] action in Button widget.
-  String? finalStaticVideoLiveAudio;
-  // Stores action output result for [Backend Call - Create Document] action in Button widget.
-  VideosRecord? videoDocStaticLive;
-  // Stores action output result for [Custom Action - addVideos] action in Button widget.
-  String? finalStaticVideo;
-  // Stores action output result for [Backend Call - Create Document] action in Button widget.
-  VideosRecord? videoDocStatic;
   // Stores action output result for [Gemini - Generate Text] action in Button widget.
   String? imgGenPrompt;
   // Stores action output result for [Action Block - GenerateGenId] action in Button widget.
@@ -131,22 +118,15 @@ class VideoPromptPageModel extends FlutterFlowModel<VideoPromptPageWidget> {
   String? finalVideo;
   // Stores action output result for [Backend Call - Create Document] action in Button widget.
   VideosRecord? videoDoc;
-  // Model for PromptToVideoLoader component.
-  late PromptToVideoLoaderModel promptToVideoLoaderModel;
 
   @override
-  void initState(BuildContext context) {
-    promptToVideoLoaderModel =
-        createModel(context, () => PromptToVideoLoaderModel());
-  }
+  void initState(BuildContext context) {}
 
   @override
   void dispose() {
     unfocusNode.dispose();
     textFieldFocusNode?.dispose();
     textController?.dispose();
-
-    promptToVideoLoaderModel.dispose();
   }
 
   /// Action blocks.
@@ -450,7 +430,7 @@ class VideoPromptPageModel extends FlutterFlowModel<VideoPromptPageWidget> {
       videoDescriptionText = generatedText;
     });
 
-    videoDescription = functions.removeSpecialCharacters(videoDescriptionText!);
+    videoDescription = videoDescriptionText;
     ttsOutput = await BuildshipAPIsGroup.textToAudioCall.call(
       text: functions.removeSpecialCharacters(videoDescriptionText!),
     );

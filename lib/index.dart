@@ -32,3 +32,7 @@ export '/generated_video_page/generated_video_page_widget.dart'
 export '/demo/demo_widget.dart' show DemoWidget;
 export '/dont_delete_this_page/dont_delete_this_page_widget.dart'
     show DontDeleteThisPageWidget;
+export '/farm_tutorial_history_list/farm_tutorial_history_list_widget.dart'
+    show FarmTutorialHistoryListWidget;
+export '/main_screens/terms_and_conditions_copy/terms_and_conditions_copy_widget.dart'
+    show TermsAndConditionsCopyWidget;
