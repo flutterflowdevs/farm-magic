@@ -89,26 +89,38 @@ class _TermsAndConditionsWidgetState extends State<TermsAndConditionsWidget> {
                         ),
                       ),
                     ),
+                    Expanded(
+                      child: Padding(
+                        padding:
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 20.0, 0.0),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              child: Text(
+                                FFLocalizations.of(context).getText(
+                                  'y1izfs2v' /* Terms And Conditions */,
+                                ),
+                                textAlign: TextAlign.center,
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      fontFamily: 'Readex Pro',
+                                      color:
+                                          FlutterFlowTheme.of(context).primary,
+                                      fontSize: 21.0,
+                                      letterSpacing: 0.0,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                   ],
                 ),
-              ),
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    FFLocalizations.of(context).getText(
-                      'y1izfs2v' /* Terms And Conditions */,
-                    ),
-                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                          fontFamily: 'Readex Pro',
-                          color: FlutterFlowTheme.of(context).primary,
-                          fontSize: 21.0,
-                          letterSpacing: 0.0,
-                          fontWeight: FontWeight.w600,
-                        ),
-                  ),
-                ],
               ),
               Divider(
                 thickness: 1.0,
@@ -130,7 +142,7 @@ class _TermsAndConditionsWidgetState extends State<TermsAndConditionsWidget> {
                             Expanded(
                               child: Text(
                                 FFLocalizations.of(context).getText(
-                                  'z8ypllso' /* Welcome to Farmers-Help! These... */,
+                                  'z8ypllso' /* Welcome to FarmersMagic! These... */,
                                 ),
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium

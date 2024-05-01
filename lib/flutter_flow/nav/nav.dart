@@ -209,9 +209,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => const FarmTutorialHistoryListWidget(),
         ),
         FFRoute(
-          name: 'TermsAndConditionsCopy',
-          path: '/termsAndConditionsCopy',
-          builder: (context, params) => const TermsAndConditionsCopyWidget(),
+          name: 'TutorialDetailPage',
+          path: '/tutorialDetailPage',
+          builder: (context, params) => TutorialDetailPageWidget(
+            videoDocRef: params.getParam(
+              'videoDocRef',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['videos'],
+            ),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
       observers: [routeObserver],

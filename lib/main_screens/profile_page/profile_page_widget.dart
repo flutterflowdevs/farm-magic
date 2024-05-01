@@ -257,7 +257,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                               color: FlutterFlowTheme.of(context).error,
                               size: 25.0,
                             ),
-                            isLogout: true,
+                            isLogout: false,
                             action: () async {
                               context.goNamed('FarmTutorialHistoryList');
                             },

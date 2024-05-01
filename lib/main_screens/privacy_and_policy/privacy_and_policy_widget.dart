@@ -88,26 +88,38 @@ class _PrivacyAndPolicyWidgetState extends State<PrivacyAndPolicyWidget> {
                         ),
                       ),
                     ),
+                    Expanded(
+                      child: Padding(
+                        padding:
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 20.0, 0.0),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              child: Text(
+                                FFLocalizations.of(context).getText(
+                                  'jffi62ux' /* Privacy Policy */,
+                                ),
+                                textAlign: TextAlign.center,
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      fontFamily: 'Readex Pro',
+                                      color:
+                                          FlutterFlowTheme.of(context).primary,
+                                      fontSize: 21.0,
+                                      letterSpacing: 0.0,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                   ],
                 ),
-              ),
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    FFLocalizations.of(context).getText(
-                      'jffi62ux' /* Privacy Policy */,
-                    ),
-                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                          fontFamily: 'Readex Pro',
-                          color: FlutterFlowTheme.of(context).primary,
-                          fontSize: 21.0,
-                          letterSpacing: 0.0,
-                          fontWeight: FontWeight.w600,
-                        ),
-                  ),
-                ],
               ),
               Divider(
                 thickness: 1.0,

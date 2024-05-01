@@ -51,13 +51,31 @@ class _PromptToVideoLoaderWidgetState extends State<PromptToVideoLoaderWidget> {
         color: FlutterFlowTheme.of(context).secondaryBackground,
         borderRadius: BorderRadius.circular(10.0),
       ),
-      child: Lottie.asset(
-        'assets/lottie_animations/Animation_-_1714209062580_(1).json',
-        width: MediaQuery.sizeOf(context).width * 0.5,
-        height: MediaQuery.sizeOf(context).height * 0.5,
-        fit: BoxFit.contain,
-        frameRate: FrameRate(60.0),
-        animate: true,
+      child: Column(
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          Lottie.asset(
+            'assets/lottie_animations/Animation_-_1714209062580_(1).json',
+            width: MediaQuery.sizeOf(context).width * 0.5,
+            height: MediaQuery.sizeOf(context).height * 0.5,
+            fit: BoxFit.contain,
+            frameRate: FrameRate(60.0),
+            animate: true,
+          ),
+          Padding(
+            padding: const EdgeInsetsDirectional.fromSTEB(22.0, 0.0, 22.0, 0.0),
+            child: Text(
+              FFLocalizations.of(context).getText(
+                'xdnrcta4' /* Hold for couple of minutes, wh... */,
+              ),
+              textAlign: TextAlign.center,
+              style: FlutterFlowTheme.of(context).bodyMedium.override(
+                    fontFamily: 'Readex Pro',
+                    letterSpacing: 0.0,
+                  ),
+            ),
+          ),
+        ],
       ),
     );
   }

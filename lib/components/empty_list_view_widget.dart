@@ -58,7 +58,7 @@ class _EmptyListViewWidgetState extends State<EmptyListViewWidget> {
                 Expanded(
                   child: Text(
                     FFLocalizations.of(context).getText(
-                      'b1512vpb' /* No Diagnose Result Available */,
+                      'b1512vpb' /* No Result Available */,
                     ),
                     textAlign: TextAlign.center,
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
