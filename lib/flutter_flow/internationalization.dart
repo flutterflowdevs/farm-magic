@@ -245,18 +245,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'pt': 'Conecte-se',
       'sw': 'Ingia',
     },
-    'bbxhsxaj': {
-      'en': 'Or',
-      'hi': 'या',
-      'pt': 'Ou',
-      'sw': 'Au',
-    },
-    'ysy3ukmv': {
-      'en': 'Connect using',
-      'hi': 'का उपयोग करके कनेक्ट करें',
-      'pt': 'Conecte-se usando',
-      'sw': 'Unganisha kwa kutumia',
-    },
     '6y114b2p': {
       'en': 'Don\'t have an account ?',
       'hi': 'क्या आपके पास खाता नहीं है?',
