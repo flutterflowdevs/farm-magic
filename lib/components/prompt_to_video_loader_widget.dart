@@ -53,11 +53,12 @@ class _PromptToVideoLoaderWidgetState extends State<PromptToVideoLoaderWidget> {
       ),
       child: Column(
         mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Lottie.asset(
             'assets/lottie_animations/Animation_-_1714209062580_(1).json',
-            width: MediaQuery.sizeOf(context).width * 0.5,
-            height: MediaQuery.sizeOf(context).height * 0.5,
+            width: MediaQuery.sizeOf(context).width * 0.75,
+            height: MediaQuery.sizeOf(context).height * 0.75,
             fit: BoxFit.contain,
             frameRate: FrameRate(60.0),
             animate: true,
@@ -66,11 +67,12 @@ class _PromptToVideoLoaderWidgetState extends State<PromptToVideoLoaderWidget> {
             padding: const EdgeInsetsDirectional.fromSTEB(22.0, 0.0, 22.0, 0.0),
             child: Text(
               FFLocalizations.of(context).getText(
-                'xdnrcta4' /* Hold for couple of minutes, wh... */,
+                'mednax8d' /* Hold for couple of minutes, wh... */,
               ),
               textAlign: TextAlign.center,
               style: FlutterFlowTheme.of(context).bodyMedium.override(
                     fontFamily: 'Readex Pro',
+                    fontSize: 18.0,
                     letterSpacing: 0.0,
                   ),
             ),

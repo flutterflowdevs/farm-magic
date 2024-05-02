@@ -98,12 +98,12 @@ class GenerateImageCall {
     final ffApiRequestBody = '''
 {
   "alchemy": true,
-  "height": $height,
+  "height": 512,
   "modelId": "aa77f04e-3eec-4034-9c07-d0f619684628",
   "prompt": "$textPrompt",
-  "width": $width,
+  "width": 512,
   "guidance_scale": 9,
-  "highResolution": true,
+  "highResolution": false,
   "num_images": 1,
   "photoReal": true,
   "photoRealVersion": "v2",

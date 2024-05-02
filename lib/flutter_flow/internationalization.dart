@@ -1681,7 +1681,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // PromptToVideoLoader
   {
-    'xdnrcta4': {
+    'mednax8d': {
       'en': 'Hold for couple of minutes, while your video is being generated',
       'hi': '',
       'pt': '',
