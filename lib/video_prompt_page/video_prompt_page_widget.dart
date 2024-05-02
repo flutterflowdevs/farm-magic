@@ -425,7 +425,26 @@ class _VideoPromptPageWidgetState extends State<VideoPromptPageWidget> {
                                         }
                                         _model.hits = _model.hits + 1;
                                       }),
-                                      Future(() async {}),
+                                      Future(() async {
+                                        _model.genImage3 =
+                                            await _model.generateGenId(
+                                          context,
+                                          prompt: functions.getPrompt(
+                                              _model.imgGenPrompt!, 2),
+                                        );
+                                        shouldSetState = true;
+                                        if (!(_model.genImage3 == null ||
+                                            _model.genImage3 == '')) {
+                                          setState(() {
+                                            _model.jsonData =
+                                                functions.newJsonValue(
+                                                    _model.jsonData!,
+                                                    '2',
+                                                    _model.genImage3!);
+                                          });
+                                        }
+                                        _model.hits = _model.hits + 1;
+                                      }),
                                       Future(() async {}),
                                       Future(() async {}),
                                     ]);
@@ -541,7 +560,55 @@ class _VideoPromptPageWidgetState extends State<VideoPromptPageWidget> {
                                             _model.hits = _model.hits + 1;
                                           });
                                         }),
-                                        Future(() async {}),
+                                        Future(() async {
+                                          _model.imageJson3 = await _model
+                                              .generateImageFromGenId(
+                                            context,
+                                            genId: functions.getJsonValue(
+                                                _model.jsonData!, '2'),
+                                            index: 2,
+                                          );
+                                          shouldSetState = true;
+                                          if (_model.imageJson3 == null) {
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              SnackBar(
+                                                content: Text(
+                                                  _model.imageJson3!.toString(),
+                                                  style: TextStyle(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryText,
+                                                  ),
+                                                ),
+                                                duration: const Duration(
+                                                    milliseconds: 4000),
+                                                backgroundColor:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondary,
+                                              ),
+                                            );
+                                            if (shouldSetState) {
+                                              setState(() {});
+                                            }
+                                            return;
+                                          } else {
+                                            setState(() {
+                                              _model
+                                                  .addToImagePath(getJsonField(
+                                                _model.imageJson3,
+                                                r'''$.url''',
+                                              ).toString());
+                                              _model.addToImgId(getJsonField(
+                                                _model.imageJson3,
+                                                r'''$.id''',
+                                              ).toString());
+                                            });
+                                            setState(() {
+                                              _model.hits = _model.hits + 1;
+                                            });
+                                          }
+                                        }),
                                         Future(() async {}),
                                         Future(() async {}),
                                       ]);

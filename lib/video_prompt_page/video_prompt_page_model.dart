@@ -106,10 +106,14 @@ class VideoPromptPageModel extends FlutterFlowModel<VideoPromptPageWidget> {
   String? genImage1;
   // Stores action output result for [Action Block - GenerateGenId] action in Button widget.
   String? genImage2;
+  // Stores action output result for [Action Block - GenerateGenId] action in Button widget.
+  String? genImage3;
   // Stores action output result for [Action Block - GenerateImageFromGenId] action in Button widget.
   dynamic imageJson1;
   // Stores action output result for [Action Block - GenerateImageFromGenId] action in Button widget.
   dynamic imageJson2;
+  // Stores action output result for [Action Block - GenerateImageFromGenId] action in Button widget.
+  dynamic imageJson3;
   // Stores action output result for [Custom Action - addVideos] action in Button widget.
   String? finalVideoLiveAudio;
   // Stores action output result for [Backend Call - Create Document] action in Button widget.
