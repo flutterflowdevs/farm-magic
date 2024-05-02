@@ -1416,28 +1416,23 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'sw': 'Ukurasa wa haraka wa Video',
     },
     '5p1hxm0o': {
-      'en': 'Prompt One, Hello flutterflow deverlopers',
+      'en':
+          'I want to grow wheat in my 2-acre land. Can you suggest me some good tips. We are going to get good monsoon this year. ',
       'hi': 'संकेत एक, नमस्कार फ़्लटरफ़्लो डेवलपर्स',
       'pt': 'Prompt Um, Olá, deverlopers do flutterflow',
       'sw': 'Prompt One, Hello flutterflow deverlopers',
     },
     'ttkyenwa': {
-      'en': 'Prompt Two, Hello flutterflow deverlopers',
+      'en': 'Natural ways to protect my field from insects.',
       'hi': 'संकेत दो, नमस्कार फ़्लटरफ़्लो डेवलपर्स',
       'pt': 'Prompt dois, Olá, deverlopers do flutterflow',
       'sw': 'Mwongozo wa Pili, Hello flutterflow deverlopers',
     },
     'zqonng1d': {
-      'en': 'Prompt Three, Hello flutterflow deverlopers',
+      'en': 'How to use cow dung in my organic farming',
       'hi': 'संकेत तीन, नमस्कार फ़्लटरफ़्लो डेवलपर्स',
       'pt': 'Prompt três, Olá, deverlopers do flutterflow',
       'sw': 'Agizo la Tatu, Hujambo wasambazaji wa flutterflow',
-    },
-    'a7wr3bj3': {
-      'en': 'Prompt Four, Hello flutterflow deverlopers',
-      'hi': 'संकेत चार, नमस्कार फ़्लटरफ़्लो डेवलपर्स',
-      'pt': 'Prompt Quatro, Olá, deverlopers do flutterflow',
-      'sw': 'Uhakika wa Nne, Hujambo wasambazaji wa flutterflow',
     },
     'rqf0rdcw': {
       'en': 'Write down your question...',
@@ -1465,6 +1460,12 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'hi': 'उत्पन्न वीडियो पृष्ठ',
       'pt': 'Página de vídeo gerada',
       'sw': 'Ukurasa wa Video Uliotolewa',
+    },
+    'iuh9w77u': {
+      'en': 'Back to Home',
+      'hi': '',
+      'pt': '',
+      'sw': '',
     },
     'qb7jddbc': {
       'en': 'Home',

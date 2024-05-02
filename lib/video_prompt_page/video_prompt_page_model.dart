@@ -83,7 +83,7 @@ class VideoPromptPageModel extends FlutterFlowModel<VideoPromptPageWidget> {
 
   bool isHardCodedValue = false;
 
-  int parallalApiCount = 2;
+  int parallalApiCount = 5;
 
   bool isLiveAudio = true;
 
@@ -108,12 +108,20 @@ class VideoPromptPageModel extends FlutterFlowModel<VideoPromptPageWidget> {
   String? genImage2;
   // Stores action output result for [Action Block - GenerateGenId] action in Button widget.
   String? genImage3;
+  // Stores action output result for [Action Block - GenerateGenId] action in Button widget.
+  String? genImage4;
+  // Stores action output result for [Action Block - GenerateGenId] action in Button widget.
+  String? genImage5;
   // Stores action output result for [Action Block - GenerateImageFromGenId] action in Button widget.
   dynamic imageJson1;
   // Stores action output result for [Action Block - GenerateImageFromGenId] action in Button widget.
   dynamic imageJson2;
   // Stores action output result for [Action Block - GenerateImageFromGenId] action in Button widget.
   dynamic imageJson3;
+  // Stores action output result for [Action Block - GenerateImageFromGenId] action in Button widget.
+  dynamic imageJson4;
+  // Stores action output result for [Action Block - GenerateImageFromGenId] action in Button widget.
+  dynamic imageJson5;
   // Stores action output result for [Custom Action - addVideos] action in Button widget.
   String? finalVideoLiveAudio;
   // Stores action output result for [Backend Call - Create Document] action in Button widget.
@@ -207,8 +215,14 @@ class VideoPromptPageModel extends FlutterFlowModel<VideoPromptPageWidget> {
   Future videoGeneratorAction(BuildContext context) async {
     ApiCallResponse? genMotion1Internal;
     ApiCallResponse? genMotion2Internal;
+    ApiCallResponse? genMotion3Internal;
+    ApiCallResponse? genMotion4Internal;
+    ApiCallResponse? genMotion5Internal;
     dynamic motionJson1Internal;
     dynamic motionJson2Internal;
+    dynamic motionJson3Internal;
+    dynamic motionJson4Internal;
+    dynamic motionJson5Internal;
 
     isImageGenerating = false;
     isLoading = true;
@@ -271,9 +285,90 @@ class VideoPromptPageModel extends FlutterFlowModel<VideoPromptPageWidget> {
           );
         }
       }),
-      Future(() async {}),
-      Future(() async {}),
-      Future(() async {}),
+      Future(() async {
+        genMotion3Internal = await LeonardoAPIsGroup.generateMotionCall.call(
+          imageId: (List<String> var1, int var2) {
+            return var1[var2];
+          }(imgId.toList(), 2),
+        );
+        if ((genMotion3Internal?.succeeded ?? true)) {
+          jsonData = functions.newJsonValue(
+              jsonData!,
+              '2',
+              LeonardoAPIsGroup.generateMotionCall.motionGenId(
+                (genMotion3Internal?.jsonBody ?? ''),
+              )!);
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(
+                (genMotion3Internal?.jsonBody ?? '').toString(),
+                style: TextStyle(
+                  color: FlutterFlowTheme.of(context).primaryText,
+                ),
+              ),
+              duration: const Duration(milliseconds: 4000),
+              backgroundColor: FlutterFlowTheme.of(context).secondary,
+            ),
+          );
+        }
+      }),
+      Future(() async {
+        genMotion4Internal = await LeonardoAPIsGroup.generateMotionCall.call(
+          imageId: (List<String> var1, int var2) {
+            return var1[var2];
+          }(imgId.toList(), 3),
+        );
+        if ((genMotion4Internal?.succeeded ?? true)) {
+          jsonData = functions.newJsonValue(
+              jsonData!,
+              '3',
+              LeonardoAPIsGroup.generateMotionCall.motionGenId(
+                (genMotion4Internal?.jsonBody ?? ''),
+              )!);
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(
+                (genMotion4Internal?.jsonBody ?? '').toString(),
+                style: TextStyle(
+                  color: FlutterFlowTheme.of(context).primaryText,
+                ),
+              ),
+              duration: const Duration(milliseconds: 4000),
+              backgroundColor: FlutterFlowTheme.of(context).secondary,
+            ),
+          );
+        }
+      }),
+      Future(() async {
+        genMotion5Internal = await LeonardoAPIsGroup.generateMotionCall.call(
+          imageId: (List<String> var1, int var2) {
+            return var1[var2];
+          }(imgId.toList(), 4),
+        );
+        if ((genMotion5Internal?.succeeded ?? true)) {
+          jsonData = functions.newJsonValue(
+              jsonData!,
+              '4',
+              LeonardoAPIsGroup.generateMotionCall.motionGenId(
+                (genMotion5Internal?.jsonBody ?? ''),
+              )!);
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(
+                (genMotion5Internal?.jsonBody ?? '').toString(),
+                style: TextStyle(
+                  color: FlutterFlowTheme.of(context).primaryText,
+                ),
+              ),
+              duration: const Duration(milliseconds: 4000),
+              backgroundColor: FlutterFlowTheme.of(context).secondary,
+            ),
+          );
+        }
+      }),
     ]);
     hits = 0;
     await Future.wait([
@@ -333,9 +428,90 @@ class VideoPromptPageModel extends FlutterFlowModel<VideoPromptPageWidget> {
           hits = hits + 1;
         }
       }),
-      Future(() async {}),
-      Future(() async {}),
-      Future(() async {}),
+      Future(() async {
+        motionJson3Internal = await generateImageFromGenId(
+          context,
+          genId: functions.getJsonValue(jsonData!, '2'),
+          index: 2,
+        );
+        if (motionJson3Internal == null) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(
+                'Image 3 URL Images',
+                style: TextStyle(
+                  color: FlutterFlowTheme.of(context).primaryText,
+                ),
+              ),
+              duration: const Duration(milliseconds: 4000),
+              backgroundColor: FlutterFlowTheme.of(context).secondary,
+            ),
+          );
+          return;
+        } else {
+          addToVideoPath(getJsonField(
+            motionJson3Internal,
+            r'''$.motionMP4URL''',
+          ).toString());
+          hits = hits + 1;
+        }
+      }),
+      Future(() async {
+        motionJson4Internal = await generateImageFromGenId(
+          context,
+          genId: functions.getJsonValue(jsonData!, '3'),
+          index: 3,
+        );
+        if (motionJson4Internal == null) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(
+                'Image 4 URL Images',
+                style: TextStyle(
+                  color: FlutterFlowTheme.of(context).primaryText,
+                ),
+              ),
+              duration: const Duration(milliseconds: 4000),
+              backgroundColor: FlutterFlowTheme.of(context).secondary,
+            ),
+          );
+          return;
+        } else {
+          addToVideoPath(getJsonField(
+            motionJson4Internal,
+            r'''$.motionMP4URL''',
+          ).toString());
+          hits = hits + 1;
+        }
+      }),
+      Future(() async {
+        motionJson5Internal = await generateImageFromGenId(
+          context,
+          genId: functions.getJsonValue(jsonData!, '4'),
+          index: 4,
+        );
+        if (motionJson5Internal == null) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(
+                'Image 5 URL Images',
+                style: TextStyle(
+                  color: FlutterFlowTheme.of(context).primaryText,
+                ),
+              ),
+              duration: const Duration(milliseconds: 4000),
+              backgroundColor: FlutterFlowTheme.of(context).secondary,
+            ),
+          );
+          return;
+        } else {
+          addToVideoPath(getJsonField(
+            motionJson5Internal,
+            r'''$.motionMP4URL''',
+          ).toString());
+          hits = hits + 1;
+        }
+      }),
     ]);
     if (hits == parallalApiCount) {
       addToImageURLList('END');
@@ -358,7 +534,7 @@ class VideoPromptPageModel extends FlutterFlowModel<VideoPromptPageWidget> {
 
     videoDescription = videoDescriptionText;
     ttsOutput = await BuildshipAPIsGroup.textToAudioCall.call(
-      text: functions.removeSpecialCharacters(videoDescriptionText!),
+      text: functions.getNewText(videoDescriptionText!),
     );
     if ((ttsOutput.succeeded ?? true)) {
       audioFile = BuildshipAPIsGroup.textToAudioCall.audioPath(

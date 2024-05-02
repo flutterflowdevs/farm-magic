@@ -129,3 +129,13 @@ dynamic newJsonValue(
 List<bool> resetMutex(int size) {
   return List<bool>.filled(size, false);
 }
+
+String? markdownToSimpleText(String markdown) {
+  final RegExp exp = RegExp(r'(?:\r\n|\r|\n)');
+  final String text = markdown.replaceAllMapped(exp, (Match m) => '\n');
+  return text;
+}
+
+String getNewText(String value) {
+  return value.replaceAll('#', "").replaceAll('*', '').replaceAll('\n', '');
+}

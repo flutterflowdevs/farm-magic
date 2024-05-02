@@ -106,7 +106,7 @@ class _VideoPromptPageWidgetState extends State<VideoPromptPageWidget> {
                           onTap: () async {
                             setState(() {
                               _model.textController?.text =
-                                  'Prompt One, Hello flutterflow deverlopers';
+                                  'I want to grow wheat in my 2-acre land. Can you suggest me some good tips. We are going to get good monsoon this year. ';
                             });
                           },
                           child: Container(
@@ -120,7 +120,7 @@ class _VideoPromptPageWidgetState extends State<VideoPromptPageWidget> {
                                   8.0, 6.0, 0.0, 6.0),
                               child: Text(
                                 FFLocalizations.of(context).getText(
-                                  '5p1hxm0o' /* Prompt One, Hello flutterflow ... */,
+                                  '5p1hxm0o' /* I want to grow wheat in my 2-a... */,
                                 ),
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
@@ -140,7 +140,7 @@ class _VideoPromptPageWidgetState extends State<VideoPromptPageWidget> {
                           onTap: () async {
                             setState(() {
                               _model.textController?.text =
-                                  'Prompt Two, Hello flutterflow deverlopers';
+                                  'Natural ways to protect my field from insects.';
                             });
                           },
                           child: Container(
@@ -154,7 +154,7 @@ class _VideoPromptPageWidgetState extends State<VideoPromptPageWidget> {
                                   8.0, 6.0, 0.0, 6.0),
                               child: Text(
                                 FFLocalizations.of(context).getText(
-                                  'ttkyenwa' /* Prompt Two, Hello flutterflow ... */,
+                                  'ttkyenwa' /* Natural ways to protect my fie... */,
                                 ),
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
@@ -174,7 +174,7 @@ class _VideoPromptPageWidgetState extends State<VideoPromptPageWidget> {
                           onTap: () async {
                             setState(() {
                               _model.textController?.text =
-                                  'Prompt Three, Hello flutterflow deverlopers';
+                                  'How to use cow dung in my organic farming';
                             });
                           },
                           child: Container(
@@ -188,41 +188,7 @@ class _VideoPromptPageWidgetState extends State<VideoPromptPageWidget> {
                                   8.0, 6.0, 0.0, 6.0),
                               child: Text(
                                 FFLocalizations.of(context).getText(
-                                  'zqonng1d' /* Prompt Three, Hello flutterflo... */,
-                                ),
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: 'Readex Pro',
-                                      letterSpacing: 0.0,
-                                    ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        InkWell(
-                          splashColor: Colors.transparent,
-                          focusColor: Colors.transparent,
-                          hoverColor: Colors.transparent,
-                          highlightColor: Colors.transparent,
-                          onTap: () async {
-                            setState(() {
-                              _model.textController?.text =
-                                  'Prompt Four, Hello flutterflow deverlopers';
-                            });
-                          },
-                          child: Container(
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                              color: const Color(0xFFB1B1B1),
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  8.0, 6.0, 0.0, 6.0),
-                              child: Text(
-                                FFLocalizations.of(context).getText(
-                                  'a7wr3bj3' /* Prompt Four, Hello flutterflow... */,
+                                  'zqonng1d' /* How to use cow dung in my orga... */,
                                 ),
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
@@ -445,8 +411,46 @@ class _VideoPromptPageWidgetState extends State<VideoPromptPageWidget> {
                                         }
                                         _model.hits = _model.hits + 1;
                                       }),
-                                      Future(() async {}),
-                                      Future(() async {}),
+                                      Future(() async {
+                                        _model.genImage4 =
+                                            await _model.generateGenId(
+                                          context,
+                                          prompt: functions.getPrompt(
+                                              _model.imgGenPrompt!, 3),
+                                        );
+                                        shouldSetState = true;
+                                        if (!(_model.genImage4 == null ||
+                                            _model.genImage4 == '')) {
+                                          setState(() {
+                                            _model.jsonData =
+                                                functions.newJsonValue(
+                                                    _model.jsonData!,
+                                                    '3',
+                                                    _model.genImage4!);
+                                          });
+                                        }
+                                        _model.hits = _model.hits + 1;
+                                      }),
+                                      Future(() async {
+                                        _model.genImage5 =
+                                            await _model.generateGenId(
+                                          context,
+                                          prompt: functions.getPrompt(
+                                              _model.imgGenPrompt!, 4),
+                                        );
+                                        shouldSetState = true;
+                                        if (!(_model.genImage5 == null ||
+                                            _model.genImage5 == '')) {
+                                          setState(() {
+                                            _model.jsonData =
+                                                functions.newJsonValue(
+                                                    _model.jsonData!,
+                                                    '4',
+                                                    _model.genImage5!);
+                                          });
+                                        }
+                                        _model.hits = _model.hits + 1;
+                                      }),
                                     ]);
                                     if (_model.hits ==
                                         _model.parallalApiCount) {
@@ -609,8 +613,104 @@ class _VideoPromptPageWidgetState extends State<VideoPromptPageWidget> {
                                             });
                                           }
                                         }),
-                                        Future(() async {}),
-                                        Future(() async {}),
+                                        Future(() async {
+                                          _model.imageJson4 = await _model
+                                              .generateImageFromGenId(
+                                            context,
+                                            genId: functions.getJsonValue(
+                                                _model.jsonData!, '3'),
+                                            index: 3,
+                                          );
+                                          shouldSetState = true;
+                                          if (_model.imageJson4 == null) {
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              SnackBar(
+                                                content: Text(
+                                                  _model.imageJson4!.toString(),
+                                                  style: TextStyle(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryText,
+                                                  ),
+                                                ),
+                                                duration: const Duration(
+                                                    milliseconds: 4000),
+                                                backgroundColor:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondary,
+                                              ),
+                                            );
+                                            if (shouldSetState) {
+                                              setState(() {});
+                                            }
+                                            return;
+                                          } else {
+                                            setState(() {
+                                              _model
+                                                  .addToImagePath(getJsonField(
+                                                _model.imageJson4,
+                                                r'''$.url''',
+                                              ).toString());
+                                              _model.addToImgId(getJsonField(
+                                                _model.imageJson4,
+                                                r'''$.id''',
+                                              ).toString());
+                                            });
+                                            setState(() {
+                                              _model.hits = _model.hits + 1;
+                                            });
+                                          }
+                                        }),
+                                        Future(() async {
+                                          _model.imageJson5 = await _model
+                                              .generateImageFromGenId(
+                                            context,
+                                            genId: functions.getJsonValue(
+                                                _model.jsonData!, '4'),
+                                            index: 4,
+                                          );
+                                          shouldSetState = true;
+                                          if (_model.imageJson5!) {
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              SnackBar(
+                                                content: Text(
+                                                  _model.imageJson5!.toString(),
+                                                  style: TextStyle(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryText,
+                                                  ),
+                                                ),
+                                                duration: const Duration(
+                                                    milliseconds: 4000),
+                                                backgroundColor:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondary,
+                                              ),
+                                            );
+                                            if (shouldSetState) {
+                                              setState(() {});
+                                            }
+                                            return;
+                                          } else {
+                                            setState(() {
+                                              _model
+                                                  .addToImagePath(getJsonField(
+                                                _model.imageJson5,
+                                                r'''$.url''',
+                                              ).toString());
+                                              _model.addToImgId(getJsonField(
+                                                _model.imageJson5,
+                                                r'''$.id''',
+                                              ).toString());
+                                            });
+                                            setState(() {
+                                              _model.hits = _model.hits + 1;
+                                            });
+                                          }
+                                        }),
                                       ]);
                                       if (_model.hits ==
                                           (_model.parallalApiCount + 1)) {
