@@ -17,6 +17,8 @@ import 'index.dart'; // Imports other custom widgets
 
 import 'index.dart'; // Imports other custom widgets
 
+import 'index.dart'; // Imports other custom widgets
+
 import 'package:farm_magic/index.dart';
 import 'package:animated_notch_bottom_bar/animated_notch_bottom_bar/animated_notch_bottom_bar.dart';
 
@@ -26,11 +28,13 @@ class NavigationPage extends StatefulWidget {
     this.width,
     this.height,
     required this.selectedLanguageCode,
+    required this.index,
   });
 
   final double? width;
   final double? height;
   final String selectedLanguageCode;
+  final int index;
 
   @override
   State<NavigationPage> createState() => _NavigationPageState();
@@ -38,7 +42,7 @@ class NavigationPage extends StatefulWidget {
 
 class _NavigationPageState extends State<NavigationPage> {
   /// Controller to handle PageView and also handles initial page
-  final _pageController = PageController(initialPage: 0);
+  PageController _pageController = PageController(initialPage: 0);
 
   /// Controller to handle bottom nav bar and also handles initial page
   final _controller = NotchBottomBarController(index: 0);
@@ -64,6 +68,13 @@ class _NavigationPageState extends State<NavigationPage> {
     ChatPageWidget(),
     ProfilePageWidget(),
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController = PageController(initialPage: widget.index);
+    _controller.index = widget.index;
+  }
 
   @override
   Widget build(BuildContext context) {

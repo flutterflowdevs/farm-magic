@@ -4,7 +4,7 @@ import '/backend/firebase_storage/storage.dart';
 import '/backend/gemini/gemini.dart';
 import '/backend/schema/enums/enums.dart';
 import '/components/disease_item_select_widget.dart';
-import '/components/setp_widget.dart';
+import '/delete/setp/setp_widget.dart';
 import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -1537,7 +1537,15 @@ class _DiseaseDetectionWidgetState extends State<DiseaseDetectionWidget> {
                                                 userRef: currentUserReference,
                                               ));
 
-                                          context.goNamed('HomePage');
+                                          context.goNamed(
+                                            'NavigationWrapper',
+                                            queryParameters: {
+                                              'index': serializeParam(
+                                                0,
+                                                ParamType.int,
+                                              ),
+                                            }.withoutNulls,
+                                          );
                                         },
                                         text:
                                             FFLocalizations.of(context).getText(

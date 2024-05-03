@@ -1,4 +1,4 @@
-import '/components/heading_container_widget.dart';
+import '/delete/heading_container/heading_container_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'weather_container_widget.dart' show WeatherContainerWidget;
 import 'package:flutter/material.dart';

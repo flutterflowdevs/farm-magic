@@ -1,4 +1,4 @@
-import '/components/heading_container_widget.dart';
+import '/delete/heading_container/heading_container_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'dart:math' as math;
@@ -296,7 +296,15 @@ class _CategoriesContainer1WidgetState
 
                               return;
                             } else {
-                              context.pushNamed('ChatPage');
+                              context.pushNamed(
+                                'NavigationWrapper',
+                                queryParameters: {
+                                  'index': serializeParam(
+                                    1,
+                                    ParamType.int,
+                                  ),
+                                }.withoutNulls,
+                              );
 
                               return;
                             }

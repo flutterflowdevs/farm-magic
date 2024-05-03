@@ -948,7 +948,15 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                     ));
 
                                 context.goNamedAuth(
-                                    'NavigationWrapper', context.mounted);
+                                  'NavigationWrapper',
+                                  context.mounted,
+                                  queryParameters: {
+                                    'index': serializeParam(
+                                      0,
+                                      ParamType.int,
+                                    ),
+                                  }.withoutNulls,
+                                );
 
                                 return;
                               } else {

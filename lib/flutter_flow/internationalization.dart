@@ -1409,12 +1409,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // VideoPromptPage
   {
-    'apzt2bqo': {
-      'en': 'Video Prompt Page',
-      'hi': 'वीडियो प्रॉम्प्ट पेज',
-      'pt': 'Página de prompt de vídeo',
-      'sw': 'Ukurasa wa haraka wa Video',
-    },
     '5p1hxm0o': {
       'en':
           'I want to grow wheat in my 2-acre land. Can you suggest me some good tips. We are going to get good monsoon this year. ',
@@ -1445,6 +1439,12 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'hi': 'जाना',
       'pt': 'Ir',
       'sw': 'Nenda',
+    },
+    'apzt2bqo': {
+      'en': 'Video Prompt Page',
+      'hi': 'वीडियो प्रॉम्प्ट पेज',
+      'pt': 'Página de prompt de vídeo',
+      'sw': 'Ukurasa wa haraka wa Video',
     },
     'mr825jdr': {
       'en': 'Home',

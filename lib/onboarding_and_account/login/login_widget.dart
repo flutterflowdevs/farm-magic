@@ -326,7 +326,15 @@ class _LoginWidgetState extends State<LoginWidget> {
                         }
 
                         context.goNamedAuth(
-                            'NavigationWrapper', context.mounted);
+                          'NavigationWrapper',
+                          context.mounted,
+                          queryParameters: {
+                            'index': serializeParam(
+                              0,
+                              ParamType.int,
+                            ),
+                          }.withoutNulls,
+                        );
                       },
                       text: FFLocalizations.of(context).getText(
                         'y5byvsgg' /* Login */,

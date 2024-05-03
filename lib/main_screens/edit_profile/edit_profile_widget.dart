@@ -755,7 +755,15 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                       photoUrl: _model.profilePhoto,
                     ));
 
-                    context.goNamed('NavigationWrapper');
+                    context.goNamed(
+                      'NavigationWrapper',
+                      queryParameters: {
+                        'index': serializeParam(
+                          0,
+                          ParamType.int,
+                        ),
+                      }.withoutNulls,
+                    );
 
                     return;
                   },

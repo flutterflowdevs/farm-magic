@@ -107,6 +107,12 @@ class _GeneratedVideoPageWidgetState extends State<GeneratedVideoPageWidget> {
                 onPressed: () async {
                   context.goNamed(
                     'NavigationWrapper',
+                    queryParameters: {
+                      'index': serializeParam(
+                        0,
+                        ParamType.int,
+                      ),
+                    }.withoutNulls,
                     extra: <String, dynamic>{
                       kTransitionInfoKey: const TransitionInfo(
                         hasTransition: true,

@@ -1,10 +1,10 @@
 import '/app_components/categories_container/categories_container_widget.dart';
-import '/app_components/categories_container1/categories_container1_widget.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
-import '/components/search_text_field_widget.dart';
 import '/components/weather_container_widget.dart';
 import '/components/your_diagnoses_widget.dart';
+import '/delete/categories_container1/categories_container1_widget.dart';
+import '/delete/search_text_field/search_text_field_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'dart:async';
 import '/flutter_flow/custom_functions.dart' as functions;
