@@ -1,10 +1,9 @@
-import '/components/text_for_terms_and_privacy_widget.dart';
+import '/delete/text_for_terms_and_privacy/text_for_terms_and_privacy_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'terms_and_conditions_widget.dart' show TermsAndConditionsWidget;
+import 'privacy_and_policy_widget.dart' show PrivacyAndPolicyWidget;
 import 'package:flutter/material.dart';
 
-class TermsAndConditionsModel
-    extends FlutterFlowModel<TermsAndConditionsWidget> {
+class PrivacyAndPolicyModel extends FlutterFlowModel<PrivacyAndPolicyWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
@@ -24,10 +23,6 @@ class TermsAndConditionsModel
   late TextForTermsAndPrivacyModel textForTermsAndPrivacyModel7;
   // Model for text_for_terms_and_privacy component.
   late TextForTermsAndPrivacyModel textForTermsAndPrivacyModel8;
-  // Model for text_for_terms_and_privacy component.
-  late TextForTermsAndPrivacyModel textForTermsAndPrivacyModel9;
-  // Model for text_for_terms_and_privacy component.
-  late TextForTermsAndPrivacyModel textForTermsAndPrivacyModel10;
 
   @override
   void initState(BuildContext context) {
@@ -47,10 +42,6 @@ class TermsAndConditionsModel
         createModel(context, () => TextForTermsAndPrivacyModel());
     textForTermsAndPrivacyModel8 =
         createModel(context, () => TextForTermsAndPrivacyModel());
-    textForTermsAndPrivacyModel9 =
-        createModel(context, () => TextForTermsAndPrivacyModel());
-    textForTermsAndPrivacyModel10 =
-        createModel(context, () => TextForTermsAndPrivacyModel());
   }
 
   @override
@@ -64,7 +55,5 @@ class TermsAndConditionsModel
     textForTermsAndPrivacyModel6.dispose();
     textForTermsAndPrivacyModel7.dispose();
     textForTermsAndPrivacyModel8.dispose();
-    textForTermsAndPrivacyModel9.dispose();
-    textForTermsAndPrivacyModel10.dispose();
   }
 }

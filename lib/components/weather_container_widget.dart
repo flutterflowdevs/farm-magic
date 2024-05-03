@@ -1,5 +1,5 @@
 import '/backend/schema/structs/index.dart';
-import '/components/heading_container_widget.dart';
+import '/delete/heading_container/heading_container_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';

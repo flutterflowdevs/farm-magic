@@ -9,7 +9,12 @@ import 'navigation_wrapper_model.dart';
 export 'navigation_wrapper_model.dart';
 
 class NavigationWrapperWidget extends StatefulWidget {
-  const NavigationWrapperWidget({super.key});
+  const NavigationWrapperWidget({
+    super.key,
+    int? index,
+  }) : index = index ?? 0;
+
+  final int index;
 
   @override
   State<NavigationWrapperWidget> createState() =>
@@ -56,6 +61,7 @@ class _NavigationWrapperWidgetState extends State<NavigationWrapperWidget> {
             width: double.infinity,
             height: double.infinity,
             selectedLanguageCode: FFAppState().selectedLanguageCode,
+            index: widget.index,
           ),
         ),
       ),

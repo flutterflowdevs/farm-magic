@@ -245,7 +245,7 @@ class _YourDiagnosesWidgetState extends State<YourDiagnosesWidget> {
                                                                       0.0),
                                                           child: Text(
                                                             diagnosesListItem
-                                                                .issueText,
+                                                                .subject,
                                                             maxLines: 1,
                                                             style: FlutterFlowTheme
                                                                     .of(context)

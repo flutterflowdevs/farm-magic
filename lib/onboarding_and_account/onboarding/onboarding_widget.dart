@@ -1,4 +1,4 @@
-import '/app_components/onboarding_flow/onboarding_flow_widget.dart';
+import '/delete/onboarding_flow/onboarding_flow_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';

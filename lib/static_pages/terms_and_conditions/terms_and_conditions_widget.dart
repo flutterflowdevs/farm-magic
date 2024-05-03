@@ -1,4 +1,4 @@
-import '/components/text_for_terms_and_privacy_widget.dart';
+import '/delete/text_for_terms_and_privacy/text_for_terms_and_privacy_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';

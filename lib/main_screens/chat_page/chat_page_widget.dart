@@ -258,38 +258,40 @@ class _ChatPageWidgetState extends State<ChatPageWidget> {
                                                                     __) =>
                                                                 launchURL(url!),
                                                           ),
-                                                          Row(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .center,
-                                                            children: [
-                                                              SizedBox(
-                                                                width: MediaQuery.sizeOf(
-                                                                            context)
-                                                                        .width *
-                                                                    0.7,
-                                                                height: 100.0,
-                                                                child: custom_widgets
-                                                                    .CustomAudioWidget(
+                                                          if (listViewChatsRecord
+                                                                      .audioUrl ==
+                                                                  '')
+                                                            Row(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .max,
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .center,
+                                                              children: [
+                                                                SizedBox(
                                                                   width: MediaQuery.sizeOf(
                                                                               context)
                                                                           .width *
                                                                       0.7,
                                                                   height: 100.0,
-                                                                  audioUrl:
-                                                                      listViewChatsRecord
-                                                                          .audioUrl,
-                                                                  backgroundColor:
-                                                                      FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .secondaryBackground,
+                                                                  child: custom_widgets
+                                                                      .CustomAudioWidget(
+                                                                    width: MediaQuery.sizeOf(context)
+                                                                            .width *
+                                                                        0.7,
+                                                                    height:
+                                                                        100.0,
+                                                                    audioUrl:
+                                                                        listViewChatsRecord
+                                                                            .audioUrl,
+                                                                    backgroundColor:
+                                                                        FlutterFlowTheme.of(context)
+                                                                            .secondaryBackground,
+                                                                  ),
                                                                 ),
-                                                              ),
-                                                            ],
-                                                          ),
+                                                              ],
+                                                            ),
                                                         ],
                                                       ),
                                                     ),

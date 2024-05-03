@@ -1,4 +1,4 @@
-import '/components/heading_container_widget.dart';
+import '/delete/heading_container/heading_container_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'categories_container1_widget.dart' show CategoriesContainer1Widget;
 import 'package:flutter/material.dart';

@@ -1,7 +1,7 @@
 import '/app_components/categories_container/categories_container_widget.dart';
-import '/app_components/categories_container1/categories_container1_widget.dart';
 import '/auth/firebase_auth/auth_util.dart';
-import '/components/search_text_field_widget.dart';
+import '/delete/categories_container1/categories_container1_widget.dart';
+import '/delete/search_text_field/search_text_field_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';

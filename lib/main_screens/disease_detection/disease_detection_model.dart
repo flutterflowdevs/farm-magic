@@ -1,6 +1,6 @@
 import '/backend/schema/enums/enums.dart';
 import '/components/disease_item_select_widget.dart';
-import '/components/setp_widget.dart';
+import '/delete/setp/setp_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'disease_detection_widget.dart' show DiseaseDetectionWidget;
 import 'package:flutter/material.dart';

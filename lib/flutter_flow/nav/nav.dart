@@ -116,7 +116,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'NavigationWrapper',
           path: '/navigationWrapper',
-          builder: (context, params) => const NavigationWrapperWidget(),
+          builder: (context, params) => NavigationWrapperWidget(
+            index: params.getParam(
+              'index',
+              ParamType.int,
+            ),
+          ),
         ),
         FFRoute(
           name: 'FogotPassword',
